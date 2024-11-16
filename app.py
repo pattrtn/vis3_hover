@@ -16,8 +16,8 @@ province_data = pd.read_csv(province_csv_path)
 district_data = pd.read_csv(district_csv_path)
 
 # Remove whitespace from province and district names
-province_data['Province'] = province_data['Province'].str.replace(' ', '')
-district_data['Province'] = district_data['Province'].str.replace(' ', '')
+province_data['Province'] = province_data['Province'].str.replace(' ', '').replace('Bangkok', 'BangkokMetropolis')
+district_data['Province'] = district_data['Province'].str.replace(' ', '').replace('Bangkok', 'BangkokMetropolis')
 district_data['district'] = district_data['district'].str.replace(' ', '')
 
 # Create dictionaries for quick lookup
