@@ -94,7 +94,7 @@ for feature in geojson_data_2["features"]:
         feature,
         tooltip=tooltip_text,
         style_function=lambda x: {
-            "fillColor": "pink",  # Static color for districts
+            "fillColor": "red",  # Static color for districts
             "color": "black",  # Border color
             "weight": 1,  # Border width
             "fillOpacity": 0.5,  # Transparency of the fill
