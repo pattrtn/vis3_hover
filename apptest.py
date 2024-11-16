@@ -5,7 +5,7 @@ from streamlit_folium import st_folium
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors  # Import to use rgb2hex
+import matplotlib.colors as mcolors  # Correctly import the colors module
 
 # Load the GeoJSON file for provinces
 geojson_file_path_1 = "gadm41_THA_1.json"
@@ -102,4 +102,3 @@ for feature in geojson_data_2["features"]:
 # Display the second map (Districts)
 st.subheader("Districts Map")
 st_folium(map_2, width=800, height=600)
-
