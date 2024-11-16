@@ -17,7 +17,7 @@ data = pd.read_csv(csv_file_path)
 province_percentage = data.set_index('province_input')['percentage_true'].to_dict()
 
 # Create a Streamlit app
-st.title("Thailand Provinces - Hover for Names and Data")
+st.title("Thailand Provinces - Heatmap by Percentage")
 
 # Initialize the map centered at Thailand
 m = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
@@ -29,14 +29,31 @@ def get_tooltip_text(name):
     percentage = province_percentage.get(clean_name, "N/A")  # Default to "N/A" if not found
     return f"{clean_name}: {percentage}%"
 
+def get_color(percentage):
+    # Assign colors based on percentage
+    if percentage == "N/A":
+        return "grey"
+    percentage = float(percentage)
+    if percentage > 75:
+        return "green"
+    elif percentage > 50:
+        return "yellow"
+    elif percentage > 25:
+        return "orange"
+    else:
+        return "red"
+
 for feature in geojson_data["features"]:
     name = feature["properties"]["NL_NAME_1"]  # Extract province name
     tooltip_text = get_tooltip_text(name)
+    clean_name = name.replace("จังหวัด", "")
+    percentage = province_percentage.get(clean_name, "N/A")
+    color = get_color(percentage)
     folium.GeoJson(
         feature,
         tooltip=tooltip_text,  # Set the tooltip to display NAME_1 and percentage
-        style_function=lambda x: {
-            "fillColor": "blue",
+        style_function=lambda x, color=color: {
+            "fillColor": color,
             "color": "black",
             "weight": 1,
             "fillOpacity": 0.5,
