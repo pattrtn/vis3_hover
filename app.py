@@ -16,8 +16,8 @@ province_data = pd.read_csv(province_csv_path)
 district_data = pd.read_csv(district_csv_path)
 
 # Create dictionaries for quick lookup
-province_percentage = province_data.set_index('province_input')['percentage_true'].to_dict()
-district_percentage = district_data.set_index(['province_input', 'district_input'])['percentage_true'].to_dict()
+province_percentage = province_data.set_index('Province')['percentage_true'].to_dict()
+district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
 # Create a Streamlit app
 st.title("Thailand Provinces and Districts - Heatmap by Percentage")
@@ -77,7 +77,7 @@ def get_tooltip_text_district(province, district):
 
 for feature in geojson_data["features"]:
     province_name = feature["properties"]["NL_NAME_1"].replace("จังหวัด", "")
-    for district in district_data[district_data['province_input'] == province_name]['district_input'].unique():
+    for district in district_data[district_data['Province'] == province_name]['district'].unique():
         tooltip_text = get_tooltip_text_district(province_name, district)
         folium.GeoJson(
             feature,
