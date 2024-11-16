@@ -4,6 +4,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Load the GeoJSON file for provinces
 geojson_file_path_1 = "gadm41_THA_1.json"
