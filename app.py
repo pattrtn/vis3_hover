@@ -24,6 +24,21 @@ province_percentage = data.set_index('province_input')['percentage_true'].to_dic
 # Create a Streamlit app
 st.title("Thailand Provinces and Districts Map")
 
+# Dropdown for selecting a province
+province_list = sorted([feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") for feature in geojson_data_1["features"]])
+selected_province = st.selectbox("Select a Province", ["All"] + province_list)
+
+# Filter GeoJSON data by selected province
+if selected_province != "All":
+    geojson_data_1["features"] = [
+        feature for feature in geojson_data_1["features"]
+        if feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") == selected_province
+    ]
+    geojson_data_2["features"] = [
+        feature for feature in geojson_data_2["features"]
+        if feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") == selected_province
+    ]
+
 # Initialize the map centered at Thailand
 map_1 = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
