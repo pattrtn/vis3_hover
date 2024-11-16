@@ -47,7 +47,7 @@ def get_tooltip_text_province(name):
 #         return "orange"
 #     else:
 #         return "red"
-def get_color(percentage):
+def get_color_province(percentage):
     # Handle "N/A" case
     if percentage == "N/A":
         return "grey"
