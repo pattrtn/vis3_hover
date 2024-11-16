@@ -46,19 +46,22 @@ def get_tooltip_text_province(name):
     percentage = province_percentage.get(name, "N/A")  # Default to "N/A" if not found
     return f"{name}: {percentage}%"
 
+# Function to get color for provinces based on the percentage (Red tone)
 def get_color_province(percentage):
-    # Assign colors based on percentage
     if percentage == "N/A":
         return "grey"
+    
+    # Convert percentage to float and normalize
     percentage = float(percentage)
-    if percentage > 75:
-        return "green"
-    elif percentage > 50:
-        return "yellow"
-    elif percentage > 25:
-        return "orange"
-    else:
-        return "red"
+    normalized_percentage = np.clip(percentage / 100, 0, 1)
+
+    # Use matplotlib's 'Reds' colormap (from white to red)
+    cmap = plt.get_cmap("Reds")
+    rgba_color = cmap(normalized_percentage)
+    
+    # Convert the RGBA color to hex
+    hex_color = mcolors.rgb2hex(rgba_color[:3])
+    return hex_color
 
 for feature in geojson_data["features"]:
     name = feature["properties"]["NAME_1"]  # Extract province name
