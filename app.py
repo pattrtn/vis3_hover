@@ -44,6 +44,11 @@ if selected_province != "All":
         feature for feature in geojson_data["features"]
         if feature["properties"]["NAME_1"] == selected_province
     ]
+    geojson_data2["features"] = [
+        feature for feature in geojson_data2["features"]
+        if feature["properties"]["NAME_1"] == selected_province
+    ]
+    district_data = district_data[district_data['Province'] == selected_province.replace(' ', '')]
 
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
