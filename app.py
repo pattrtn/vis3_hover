@@ -15,6 +15,11 @@ district_csv_path = "./Province_and_District_Check_Percentage.csv"
 province_data = pd.read_csv(province_csv_path)
 district_data = pd.read_csv(district_csv_path)
 
+# Remove whitespace from province and district names
+province_data['Province'] = province_data['Province'].str.replace(' ', '')
+district_data['Province'] = district_data['Province'].str.replace(' ', '')
+district_data['district'] = district_data['district'].str.replace(' ', '')
+
 # Create dictionaries for quick lookup
 province_percentage = province_data.set_index('Province')['percentage_true'].to_dict()
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
