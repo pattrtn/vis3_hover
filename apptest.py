@@ -41,6 +41,7 @@ def get_color_province(percentage):
     if percentage == "N/A":
         return "grey"
     
+    # Convert percentage to float and normalize
     percentage = float(percentage)
     normalized_percentage = np.clip(percentage / 100, 0, 1)
 
@@ -58,16 +59,17 @@ for feature in geojson_data_1["features"]:
     tooltip_text = get_tooltip_text_province(name)
     clean_name = name.replace("จังหวัด", "")
     percentage = province_percentage.get(clean_name, "N/A")
-    color = get_color_province(percentage)
+    color = get_color_province(percentage)  # Get color for this province
     
+    # Explicitly pass color here by defining a function that uses `color` for each feature
     folium.GeoJson(
         feature,
         tooltip=tooltip_text,
-        style_function=lambda x, color=color: {
-            "fillColor": color,
-            "color": "black",
-            "weight": 1,
-            "fillOpacity": 0.5,
+        style_function=lambda feature, color=color: {
+            "fillColor": color,  # Set fill color dynamically
+            "color": "black",  # Border color
+            "weight": 1,  # Border width
+            "fillOpacity": 0.5,  # Transparency of the fill
         }
     ).add_to(map_1)
 
@@ -92,10 +94,10 @@ for feature in geojson_data_2["features"]:
         feature,
         tooltip=tooltip_text,
         style_function=lambda x: {
-            "fillColor": "red",  # Static color for districts
-            "color": "black",
-            "weight": 1,
-            "fillOpacity": 0.5,
+            "fillColor": "blue",  # Static color for districts
+            "color": "black",  # Border color
+            "weight": 1,  # Border width
+            "fillOpacity": 0.5,  # Transparency of the fill
         }
     ).add_to(map_2)
 
