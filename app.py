@@ -5,12 +5,16 @@ from streamlit_folium import st_folium
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors  # Correctly import the colors module
+import matplotlib.colors as mcolors
 
 # Load the GeoJSON file
 geojson_file_path = "gadm41_THA_1.json"
 with open(geojson_file_path, "r", encoding="utf-8") as f:
     geojson_data = json.load(f)
+
+geojson_file_path2 = "gadm41_THA_2.json"
+with open(geojson_file_path2, "r", encoding="utf-8") as f2:
+    geojson_data2 = json.load(f2)
 
 # Load the CSV files for province and district percentages
 province_csv_path = "./Province_Check_Percentage.csv"
@@ -49,7 +53,6 @@ def get_tooltip_text_province(name):
     percentage = province_percentage.get(name, "N/A")  # Default to "N/A" if not found
     return f"{name}: {percentage}%"
 
-# Function to get color for provinces based on the percentage (Red tone)
 def get_color_province(percentage):
     if percentage == "N/A":
         return "grey"
@@ -94,20 +97,24 @@ def get_tooltip_text_district(province, district):
     percentage = district_percentage.get((province, district), "N/A")  # Default to "N/A" if not found
     return f"{district}: {percentage}%"
 
-for feature in geojson_data["features"]:
+# Log district data
+st.subheader("Logged Districts")
+st.write(district_data)
+
+for feature in geojson_data2["features"]:
     province_name = feature["properties"]["NAME_1"]
-    for district in district_data[district_data['Province'] == province_name]['district'].unique():
-        tooltip_text = get_tooltip_text_district(province_name, district)
-        folium.GeoJson(
-            feature,
-            tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
-            style_function=lambda x: {
-                "fillColor": "blue",
-                "color": "black",
-                "weight": 1,
-                "fillOpacity": 0.5,
-            },
-        ).add_to(district_map)
+    district_name = feature["properties"]["NAME_2"]
+    tooltip_text = get_tooltip_text_district(province_name, district_name)
+    folium.GeoJson(
+        feature,
+        tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
+        style_function=lambda x: {
+            "fillColor": "blue",
+            "color": "black",
+            "weight": 1,
+            "fillOpacity": 0.5,
+        },
+    ).add_to(district_map)
 
 # Display the district map in Streamlit
 st.subheader("Districts Heatmap")
