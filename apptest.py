@@ -36,7 +36,7 @@ def get_tooltip_text_province(name):
     percentage = province_percentage.get(clean_name, "N/A")
     return f"{clean_name}: {percentage}%"
 
-# Function to get color for provinces based on the percentage
+# Function to get color for provinces based on the percentage (Red tone)
 def get_color_province(percentage):
     if percentage == "N/A":
         return "grey"
@@ -44,8 +44,8 @@ def get_color_province(percentage):
     percentage = float(percentage)
     normalized_percentage = np.clip(percentage / 100, 0, 1)
 
-    # Use matplotlib's 'coolwarm' colormap
-    cmap = plt.get_cmap("hot")
+    # Use matplotlib's 'Reds' colormap (from white to red)
+    cmap = plt.get_cmap("Reds")
     rgba_color = cmap(normalized_percentage)
     
     # Convert the RGBA color to hex
