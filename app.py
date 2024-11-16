@@ -98,23 +98,17 @@ st_folium(province_map, width=800, height=600)
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
 # Add GeoJSON polygons with tooltips and percentage data for districts
-def get_tooltip_text_district(province, district):
-    percentage = district_percentage.get((province, district), "N/A")  # Default to "N/A" if not found
-    return f"{district}: {percentage}%"
-
-# Log district data
-st.subheader("Logged Districts")
-st.write(district_data)
-
 for feature in geojson_data2["features"]:
     province_name = feature["properties"]["NAME_1"]
     district_name = feature["properties"]["NAME_2"]
-    tooltip_text = get_tooltip_text_district(province_name, district_name)
+    percentage = district_percentage.get((province_name, district_name), "N/A")
+    tooltip_text = f"{district_name}: {percentage}%"
+    color = get_color_province(percentage)
     folium.GeoJson(
         feature,
         tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
-        style_function=lambda x: {
-            "fillColor": "blue",
+        style_function=lambda x, color=color: {
+            "fillColor": color,
             "color": "black",
             "weight": 1,
             "fillOpacity": 0.5,
