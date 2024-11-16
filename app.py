@@ -4,43 +4,26 @@ import streamlit as st
 from streamlit_folium import st_folium
 import pandas as pd
 
-# Load the GeoJSON file for provinces
-geojson_file_path_1 = "gadm41_THA_1.json"
-with open(geojson_file_path_1, "r", encoding="utf-8") as f:
-    geojson_data_1 = json.load(f)
+# Load the GeoJSON file
+geojson_file_path = "gadm41_THA_1.json"
+with open(geojson_file_path, "r", encoding="utf-8") as f:
+    geojson_data = json.load(f)
 
-# Load the GeoJSON file for districts
-geojson_file_path_2 = "gadm41_THA_2.json"
-with open(geojson_file_path_2, "r", encoding="utf-8") as f:
-    geojson_data_2 = json.load(f)
+# Load the CSV files for province and district percentages
+province_csv_path = "./Percentage_of_Correct_Predictions_by_Province.csv"
+district_csv_path = "./Percentage_of_Correct_Predictions_by_Province_and_District.csv"
+province_data = pd.read_csv(province_csv_path)
+district_data = pd.read_csv(district_csv_path)
 
-# Load the CSV file for province percentages
-csv_file_path = "./Percentage_of_Correct_Predictions_by_Province.csv"
-data = pd.read_csv(csv_file_path)
-
-# Create a dictionary for quick lookup of percentage by province
-province_percentage = data.set_index('province_input')['percentage_true'].to_dict()
+# Create dictionaries for quick lookup
+province_percentage = province_data.set_index('province_input')['percentage_true'].to_dict()
+district_percentage = district_data.set_index(['province_input', 'district_input'])['percentage_true'].to_dict()
 
 # Create a Streamlit app
-st.title("Thailand Provinces and Districts Map")
-
-# Dropdown for selecting a province
-province_list = sorted([feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") for feature in geojson_data_1["features"]])
-selected_province = st.selectbox("Select a Province", ["All"] + province_list)
-
-# Filter GeoJSON data by selected province
-if selected_province != "All":
-    geojson_data_1["features"] = [
-        feature for feature in geojson_data_1["features"]
-        if feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") == selected_province
-    ]
-    geojson_data_2["features"] = [
-        feature for feature in geojson_data_2["features"]
-        if feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") == selected_province
-    ]
+st.title("Thailand Provinces and Districts - Heatmap by Percentage")
 
 # Initialize the map centered at Thailand
-map_1 = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
+province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
 # Add GeoJSON polygons with tooltips and percentage data for provinces
 def get_tooltip_text_province(name):
@@ -63,7 +46,7 @@ def get_color_province(percentage):
     else:
         return "red"
 
-for feature in geojson_data_1["features"]:
+for feature in geojson_data["features"]:
     name = feature["properties"]["NL_NAME_1"]  # Extract province name
     tooltip_text = get_tooltip_text_province(name)
     clean_name = name.replace("จังหวัด", "")
@@ -78,35 +61,35 @@ for feature in geojson_data_1["features"]:
             "weight": 1,
             "fillOpacity": 0.5,
         },
-    ).add_to(map_1)
+    ).add_to(province_map)
 
-# Display the first map in Streamlit
+# Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
-st_folium(map_1, width=800, height=600)
+st_folium(province_map, width=800, height=600)
 
-# Initialize the second map for districts
-map_2 = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
+# Initialize the district map
+district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
-# Add GeoJSON polygons with tooltips for districts
-def get_tooltip_text_district(name):
-    # Remove "อำเภอ" or similar prefixes from NL_NAME_2 if present
-    clean_name = name.replace("อำเภอ", "")
-    return clean_name
+# Add GeoJSON polygons with tooltips and percentage data for districts
+def get_tooltip_text_district(province, district):
+    percentage = district_percentage.get((province, district), "N/A")  # Default to "N/A" if not found
+    return f"{district}: {percentage}%"
 
-for feature in geojson_data_2["features"]:
-    name = feature["properties"]["NL_NAME_2"]  # Extract district name
-    tooltip_text = get_tooltip_text_district(name)
-    folium.GeoJson(
-        feature,
-        tooltip=tooltip_text,  # Set the tooltip to display NL_NAME_2
-        style_function=lambda x: {
-            "fillColor": "blue",
-            "color": "black",
-            "weight": 1,
-            "fillOpacity": 0.5,
-        },
-    ).add_to(map_2)
+for feature in geojson_data["features"]:
+    province_name = feature["properties"]["NL_NAME_1"].replace("จังหวัด", "")
+    for district in district_data[district_data['province_input'] == province_name]['district_input'].unique():
+        tooltip_text = get_tooltip_text_district(province_name, district)
+        folium.GeoJson(
+            feature,
+            tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
+            style_function=lambda x: {
+                "fillColor": "blue",
+                "color": "black",
+                "weight": 1,
+                "fillOpacity": 0.5,
+            },
+        ).add_to(district_map)
 
-# Display the second map in Streamlit
-st.subheader("Districts Map")
-st_folium(map_2, width=800, height=600)
+# Display the district map in Streamlit
+st.subheader("Districts Heatmap")
+st_folium(district_map, width=800, height=600)
