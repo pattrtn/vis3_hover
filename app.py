@@ -10,8 +10,8 @@ with open(geojson_file_path, "r", encoding="utf-8") as f:
     geojson_data = json.load(f)
 
 # Load the CSV files for province and district percentages
-province_csv_path = "./Percentage_of_Correct_Predictions_by_Province.csv"
-district_csv_path = "./Percentage_of_Correct_Predictions_by_Province_and_District.csv"
+province_csv_path = "./Province_Check_Percentage.csv"
+district_csv_path = "./Province_and_District_Check_Percentage.csv"
 province_data = pd.read_csv(province_csv_path)
 district_data = pd.read_csv(district_csv_path)
 
