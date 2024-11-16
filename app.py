@@ -37,6 +37,20 @@ if selected_province != "All":
     geojson_data_2["features"] = [
         feature for feature in geojson_data_2["features"]
         if feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") == selected_province
+    ]
+
+# Initialize the map centered at Thailand
+map_1 = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
+
+# Add GeoJSON polygons with tooltips and percentage data for provinces
+def get_tooltip_text_province(name):
+    # Remove "จังหวัด" from NL_NAME_1 if present
+    clean_name = name.replace("จังหวัด", "")
+    percentage = province_percentage.get(clean_name, "N/A")  # Default to "N/A" if not found
+    return f"{clean_name}: {percentage}%"
+
+def get_color_province(percentage):
+    # Assign colors based on percentage
     if percentage == "N/A":
         return "grey"
     percentage = float(percentage)
