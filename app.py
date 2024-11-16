@@ -10,7 +10,7 @@ with open(geojson_file_path, "r", encoding="utf-8") as f:
     geojson_data = json.load(f)
 
 # Load the CSV file for province percentages
-csv_file_path = "/mnt/data/Percentage_of_Correct_Predictions_by_Province.csv"
+csv_file_path = "./Percentage_of_Correct_Predictions_by_Province.csv"
 data = pd.read_csv(csv_file_path)
 
 # Create a dictionary for quick lookup of percentage by province
