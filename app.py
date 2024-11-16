@@ -23,14 +23,14 @@ district_percentage = district_data.set_index(['Province', 'district'])['percent
 st.title("Thailand Provinces and Districts - Heatmap by Percentage")
 
 # Dropdown for selecting a province
-province_list = sorted([feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") for feature in geojson_data["features"]])
+province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
 selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 
 # Filter GeoJSON data by selected province
 if selected_province != "All":
     geojson_data["features"] = [
         feature for feature in geojson_data["features"]
-        if feature["properties"]["NL_NAME_1"].replace("จังหวัด", "") == selected_province
+        if feature["properties"]["NAME_1"] == selected_province
     ]
 
 # Initialize the map centered at Thailand
@@ -38,10 +38,8 @@ province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
 # Add GeoJSON polygons with tooltips and percentage data for provinces
 def get_tooltip_text_province(name):
-    # Remove "จังหวัด" from NL_NAME_1 if present
-    clean_name = name.replace("จังหวัด", "")
-    percentage = province_percentage.get(clean_name, "N/A")  # Default to "N/A" if not found
-    return f"{clean_name}: {percentage}%"
+    percentage = province_percentage.get(name, "N/A")  # Default to "N/A" if not found
+    return f"{name}: {percentage}%"
 
 def get_color_province(percentage):
     # Assign colors based on percentage
@@ -58,10 +56,9 @@ def get_color_province(percentage):
         return "red"
 
 for feature in geojson_data["features"]:
-    name = feature["properties"]["NL_NAME_1"]  # Extract province name
+    name = feature["properties"]["NAME_1"]  # Extract province name
     tooltip_text = get_tooltip_text_province(name)
-    clean_name = name.replace("จังหวัด", "")
-    percentage = province_percentage.get(clean_name, "N/A")
+    percentage = province_percentage.get(name, "N/A")
     color = get_color_province(percentage)
     folium.GeoJson(
         feature,
@@ -87,7 +84,7 @@ def get_tooltip_text_district(province, district):
     return f"{district}: {percentage}%"
 
 for feature in geojson_data["features"]:
-    province_name = feature["properties"]["NL_NAME_1"].replace("จังหวัด", "")
+    province_name = feature["properties"]["NAME_1"]
     for district in district_data[district_data['Province'] == province_name]['district'].unique():
         tooltip_text = get_tooltip_text_district(province_name, district)
         folium.GeoJson(
