@@ -45,7 +45,7 @@ def get_color_province(percentage):
     normalized_percentage = np.clip(percentage / 100, 0, 1)
 
     # Use matplotlib's 'coolwarm' colormap
-    cmap = plt.get_cmap("coolwarm")
+    cmap = plt.get_cmap("Blues")
     rgba_color = cmap(normalized_percentage)
     
     # Convert the RGBA color to hex
