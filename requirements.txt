@@ -9,3 +9,5 @@ matplotlib
 basemap
 folium
 streamlit_folium
+numpy
+matplotlib
