@@ -3,6 +3,9 @@ import folium
 import streamlit as st
 from streamlit_folium import st_folium
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors  # Correctly import the colors module
 
 # Load the GeoJSON file
 geojson_file_path = "gadm41_THA_1.json"
