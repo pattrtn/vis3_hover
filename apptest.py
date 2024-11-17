@@ -22,7 +22,7 @@ district_csv_path = "./Province_and_District_Check_Percentage.csv"
 province_data = pd.read_csv(province_csv_path)
 district_data = pd.read_csv(district_csv_path)
 
-# Remove whitespace from province and district names
+# Clean the data to remove spaces in province/district names
 province_data['Province'] = province_data['Province'].str.replace(' ', '').replace('Bangkok', 'BangkokMetropolis')
 district_data['Province'] = district_data['Province'].str.replace(' ', '').replace('Bangkok', 'BangkokMetropolis')
 district_data['district'] = district_data['district'].str.replace(' ', '')
@@ -31,10 +31,10 @@ district_data['district'] = district_data['district'].str.replace(' ', '')
 province_percentage = province_data.set_index('Province')['percentage_true'].to_dict()
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
-# Create a Streamlit app
+# Streamlit UI Setup
 st.title("Thailand Provinces and Districts - Heatmap by Percentage")
 
-# Sidebar for data range visualization
+# Sidebar for selecting colormap and percentage range
 st.sidebar.header("Data Range")
 st.sidebar.markdown("### Gradient Map")
 min_percentage = 0  # Gradient starts at 0%
@@ -69,32 +69,26 @@ def show_gradient(scale_type="province"):
     plt.axis("off")
     st.sidebar.pyplot(plt)
 
-# Show appropriate gradient scale
+# Add the appropriate gradient scale based on the selection
 if selected_province != "All" and selected_district == "All":
     show_gradient(scale_type="province")
 elif selected_district != "All":
     show_gradient(scale_type="district")
 else:
-    # No specific province or district selected, hide scale
     pass
 
-# Add GeoJSON polygons with tooltips and percentage data for all districts or provinces
-for feature in geojson_data2["features"]:
+# Filter GeoJSON data by the selected province (if any)
+filtered_geojson = geojson_data["features"] if selected_province == "All" else [
+    feature for feature in geojson_data["features"]
+    if feature["properties"]["NAME_1"] == selected_province
+]
+
+# Add GeoJSON polygons for provinces (only selected province if applicable)
+for feature in filtered_geojson:
     province_name = feature["properties"]["NAME_1"]
-    district_name = feature["properties"]["NAME_2"]
-    
-    if selected_province != "All" and selected_district == "All":
-        # Province map visualization
-        percentage = province_percentage.get(province_name, "N/A")
-        tooltip_text = f"{province_name}: {percentage}%" if percentage != "N/A" else f"{province_name}: N/A"
-        color = cmap(percentage / 100) if percentage != "N/A" else "grey"
-    elif selected_province != "All" and selected_district != "All" and province_name == selected_province and district_name == selected_district:
-        # District map visualization for the selected district
-        percentage = district_percentage.get((province_name, district_name), "N/A")
-        tooltip_text = f"{district_name}: {percentage}%" if percentage != "N/A" else f"{district_name}: N/A"
-        color = cmap(percentage / 100) if percentage != "N/A" else "grey"
-    else:
-        continue  # Skip if it doesn't match the selected filters
+    tooltip_text = f"{province_name}: {province_percentage.get(province_name, 'N/A')}%"
+    percentage = province_percentage.get(province_name, "N/A")
+    color = cmap(percentage / 100) if percentage != "N/A" else "grey"
 
     folium.GeoJson(
         feature,
@@ -107,6 +101,29 @@ for feature in geojson_data2["features"]:
         }
     ).add_to(district_map)
 
+# Filter GeoJSON data for districts if a district is selected
+if selected_district != "All":
+    district_geojson = [
+        feature for feature in geojson_data2["features"]
+        if feature["properties"]["NAME_1"] == selected_province and feature["properties"]["NAME_2"] == selected_district
+    ]
+    for feature in district_geojson:
+        district_name = feature["properties"]["NAME_2"]
+        tooltip_text = f"{district_name}: {district_percentage.get((selected_province, district_name), 'N/A')}%"
+        percentage = district_percentage.get((selected_province, district_name), "N/A")
+        color = cmap(percentage / 100) if percentage != "N/A" else "grey"
+
+        folium.GeoJson(
+            feature,
+            tooltip=tooltip_text,
+            style_function=lambda x, color=color: {
+                "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else "grey",
+                "color": "black",
+                "weight": 1,
+                "fillOpacity": 0.5,
+            }
+        ).add_to(district_map)
+
 # Display the map in Streamlit
-st.subheader("Districts/Provinces Heatmap")
+st.subheader("Provinces and Districts Heatmap")
 st_folium(district_map, width=800, height=600)
