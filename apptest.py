@@ -185,7 +185,7 @@ if selected_province != "All":
     # Display the province map in Streamlit
     st_folium(province_map, width=800, height=600)
 
-    # Color scale for province selection
+    # **Province Color Scale** first in the sidebar
     position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
     plt.figure(figsize=(6, 0.5))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
@@ -194,3 +194,6 @@ if selected_province != "All":
     plt.bar([position], [1], color='black', width=5, align='center')  # Highlight the position on the color bar
     st.sidebar.subheader("Province Color Scale")  # Title for Province color scale
     st.sidebar.pyplot(plt)
+
+    # Show the percentage for the selected province
+    st.sidebar.subheader(f"Percentage for {selected_province}: {highlight_percentage}%")
