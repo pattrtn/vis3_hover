@@ -103,6 +103,7 @@ province_map_data = st_folium(province_map, width=800, height=600)
 # Handle user interaction with provinces
 if province_map_data:
     clicked_coordinates = province_map_data.get('last_clicked', None)
+    st.write("Debug: clicked_coordinates", clicked_coordinates)  # Debug clicked coordinates
     if clicked_coordinates:
         lat, lng = clicked_coordinates['lat'], clicked_coordinates['lng']
         point = Point(lng, lat)  # Convert lat, lng to a shapely Point
@@ -110,6 +111,7 @@ if province_map_data:
         clicked_province_name = None
         for feature in geojson_data["features"]:
             polygon = shape(feature["geometry"])  # Create a shapely Polygon
+            st.write("Debug: polygon", polygon)  # Debug polygon
             if polygon.contains(point):  # Check if the point is inside the polygon
                 clicked_province_name = feature["properties"]["NAME_1"]
                 break
