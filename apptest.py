@@ -34,6 +34,7 @@ district_percentage = district_data.set_index(['Province', 'district'])['percent
 # Streamlit App
 st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
 st.markdown("[Predict Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app/)!")
+
 st.markdown(
     """This heatmap visualizes the accuracy percentage of data across Thailand’s provinces and districts. 
     Each region is color-coded based on the accuracy of the information associated with it, providing a clear and intuitive way to assess the quality of data at both the provincial and district levels."""
@@ -79,14 +80,11 @@ district_list = sorted(list(set(district_data[district_data['Province'] == selec
 
 selected_district = st.selectbox("Select a District", ["All"] + district_list)
 
-# Initialize the district map
-district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
-
-# Function to add district data to the map (only for the selected district)
-def add_districts_to_map():
-    # Clear previous layers (to avoid overlapping markers)
-    district_map.clear_layers()
-
+# Function to create and add district data to the map (only for the selected district)
+def create_district_map():
+    # Create a new folium map each time the function is called
+    district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
+    
     for feature in geojson_data2["features"]:
         province_name = feature["properties"]["NAME_1"]
         district_name = feature["properties"]["NAME_2"]
@@ -115,9 +113,11 @@ def add_districts_to_map():
                 "fillOpacity": 0.5,
             }
         ).add_to(district_map)
+    
+    return district_map
 
-# Add districts to the map
-add_districts_to_map()
+# Create the district map based on selected district
+district_map = create_district_map()
 
 # Display the district map in Streamlit (this will show the selected district or all districts)
 st.subheader("Districts Heatmap")
