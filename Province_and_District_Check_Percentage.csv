@@ -1,0 +1,928 @@
+Province,district,percentage_true
+Amnat Charoen,Chanuman,40
+Amnat Charoen,HuaTaphan,12.5
+Amnat Charoen,LuAmnat,28.57
+Amnat Charoen,MuangAmnatCharoen,36.84
+Amnat Charoen,PathumRatwongsa,42.86
+Amnat Charoen,Phana,25
+Ang Thong,Senangkhanikhom,66.67
+Ang Thong,Chaiyo,66.67
+Ang Thong,MuangAngThong,21.43
+Ang Thong,PaMok,37.5
+Ang Thong,PhoThong,66.67
+Ang Thong,Samko,40
+Ang Thong,SawaengHa,71.43
+BangkokMetropolis,WisetChaiChan,86.67
+BangkokMetropolis,BangBon,0
+BangkokMetropolis,BangKapi,0
+BangkokMetropolis,BangKhae,0
+BangkokMetropolis,BangKhen,100
+BangkokMetropolis,BangKhoLaem,33.33
+BangkokMetropolis,Bangkhuntien,100
+BangkokMetropolis,BangNa,0
+BangkokMetropolis,BangPlad,0
+BangkokMetropolis,BangRak,40
+BangkokMetropolis,BangSu,50
+BangkokMetropolis,BangkokNoi,0
+BangkokMetropolis,BangkokYai,100
+BangkokMetropolis,BungKum,33.33
+BangkokMetropolis,Chatuchak,80
+BangkokMetropolis,ChomThong,25
+BangkokMetropolis,DinDang,0
+BangkokMetropolis,DonMuang,66.67
+BangkokMetropolis,Dusit,40
+BangkokMetropolis,HuaiKwang,0
+BangkokMetropolis,KhanNaYao,0
+BangkokMetropolis,KhlongSamWa,40
+BangkokMetropolis,KhlongSan,0
+BangkokMetropolis,KhlongToey,33.33
+BangkokMetropolis,LakSi,100
+BangkokMetropolis,LatKrabang,50
+BangkokMetropolis,LatPhrao,0
+BangkokMetropolis,MinBuri,50
+BangkokMetropolis,NongChok,12.5
+BangkokMetropolis,Nongkheam,0
+BangkokMetropolis,PathumWan,50
+BangkokMetropolis,PhasiCharoen,0
+BangkokMetropolis,PhayaThai,0
+BangkokMetropolis,Prakanong,100
+BangkokMetropolis,PhraNakhon,83.33
+BangkokMetropolis,PomPramSattru,100
+BangkokMetropolis,Prawet,33.33
+BangkokMetropolis,RatBurana,50
+BangkokMetropolis,Ratchathewi,25
+BangkokMetropolis,SaiMai,0
+BangkokMetropolis,Samphantawong,66.67
+BangkokMetropolis,SaphanSung,0
+BangkokMetropolis,Sathorn,0
+BangkokMetropolis,SuanLuang,0
+BangkokMetropolis,TalingChan,33.33
+BangkokMetropolis,ThawiWattana,0
+BangkokMetropolis,ThonBuri,71.43
+BangkokMetropolis,Thungkru,0
+BangkokMetropolis,Wattana,100
+BangkokMetropolis,WangThonglang,25
+Bueng Kan,YanNawa,0
+Bueng Kan,BungKhongLong,25
+Bueng Kan,K.BungKhla,100
+Bueng Kan,BungKan,8.33
+Bueng Kan,PakKhat,0
+Bueng Kan,PhonCharoen,0
+Bueng Kan,Seka,0
+Bueng Kan,SiWilai,0
+Buri Ram,SoPhisai,0
+Buri Ram,K.BanDan,100
+Buri Ram,BanKruat,66.67
+Buri Ram,BanMaiChaiPho,0
+Buri Ram,Chalermphrakiet,0
+Buri Ram,Chamni,66.67
+Buri Ram,HuaiRat,75
+Buri Ram,KhuanDon,0
+Buri Ram,KhuMuang,14.29
+Buri Ram,Krasang,100
+Buri Ram,LahanSai,83.33
+Buri Ram,LamPlaiMat,25
+Buri Ram,MuangBuriRam,68.42
+Buri Ram,NaPho,0
+Buri Ram,NangRong,6.67
+Buri Ram,NonDinDaeng,33.33
+Buri Ram,NonSuwan,50
+Buri Ram,NongHong,42.86
+Buri Ram,NongKi,70
+Buri Ram,Pakham,20
+Buri Ram,PhlapphlaChai,60
+Buri Ram,Phutthaisong,85.71
+Buri Ram,PrakhonChai,75
+Chachoengsao,Satuk,100
+Chachoengsao,BanPho,35.29
+Chachoengsao,BangKhla,77.78
+Chachoengsao,BangNamPrieo,80
+Chachoengsao,BangPakong,100
+Chachoengsao,K.KhlongKhuan,80
+Chachoengsao,MuangChachoengsao,84.21
+Chachoengsao,PhanomSarakham,100
+Chachoengsao,PlaengYao,25
+Chachoengsao,Ratchasan,66.67
+Chachoengsao,SanamChaiKhet,75
+Chai Nat,ThaTaKieb,100
+Chai Nat,Hankha,75
+Chai Nat,Manorom,71.43
+Chai Nat,MuangChaiNat,66.67
+Chai Nat,K.NoenKham,0
+Chai Nat,K.NongMaMong,50
+Chai Nat,Sankhaburi,62.5
+Chai Nat,Sanphaya,85.71
+Chaiyaphum,WatSing,100
+Chaiyaphum,BamnetNarong,0
+Chaiyaphum,BanKhwao,0
+Chaiyaphum,BanThaen,0
+Chaiyaphum,Chatturat,77.78
+Chaiyaphum,KaengKhoi,70
+Chaiyaphum,KasetSombon,18.18
+Chaiyaphum,KhonSan,0
+Chaiyaphum,KhonSawan,0
+Chaiyaphum,MuangChaiyaphum,26.32
+Chaiyaphum,NoenSa-nga,25
+Chaiyaphum,NongBuaDaeng,0
+Chaiyaphum,NongBuaRawae,20
+Chaiyaphum,PhakdiChumphol,0
+Chaiyaphum,PhuKhieo,0
+Chaiyaphum,K.SapYai,0
+Chanthaburi,ThepSathit,40
+Chanthaburi,KangHangMaeo,60
+Chanthaburi,K.KaoKichakut,80
+Chanthaburi,Khlung,8.33
+Chanthaburi,LaemSing,71.43
+Chanthaburi,Makham,83.33
+Chanthaburi,MuangChanthaburi,72.73
+Chanthaburi,K.NaYaiAm,33.33
+Chanthaburi,PongNamRon,100
+Chanthaburi,Soydow,60
+Chiang Mai,ThaMai,78.57
+Chiang Mai,ChaiPrakarn,75
+Chiang Mai,ChiangDao,0
+Chiang Mai,ChomThong,50
+Chiang Mai,K.DoiLo,75
+Chiang Mai,DoiSaket,85.71
+Chiang Mai,DoiTao,66.67
+Chiang Mai,Fang,0
+Chiang Mai,GalayaniVadhana,0
+Chiang Mai,HangDong,9.09
+Chiang Mai,Hot,83.33
+Chiang Mai,MaeAi,71.43
+Chiang Mai,MaeChaem,71.43
+Chiang Mai,K.MaeOn,50
+Chiang Mai,MaeRim,63.64
+Chiang Mai,MaeTaeng,61.54
+Chiang Mai,MaeWang,100
+Chiang Mai,MuangChiangMai,68.75
+Chiang Mai,Omkoi,0
+Chiang Mai,Phrao,9.09
+Chiang Mai,Samoeng,100
+Chiang Mai,SanKamphaeng,0
+Chiang Mai,SanPaTong,18.18
+Chiang Mai,SanSai,8.33
+Chiang Mai,Saraphi,41.67
+Chiang Rai,WiangHaeng,66.67
+Chiang Rai,ChiangKhong,0
+Chiang Rai,ChiangSaen,0
+Chiang Rai,K.DoiLuang,0
+Chiang Rai,KhunTan,0
+Chiang Rai,MaeChan,90.91
+Chiang Rai,MaeFaLuang,0
+Chiang Rai,MaeLao,20
+Chiang Rai,MaeSai,25
+Chiang Rai,MaeSuai,57.14
+Chiang Rai,MuangChiangRai,6.25
+Chiang Rai,PaDaet,40
+Chiang Rai,Phan,13.33
+Chiang Rai,PhayaMengrai,0
+Chiang Rai,Thoeng,80
+Chiang Rai,WiangChai,40
+Chiang Rai,K.WiengChiang,33.33
+Chiang Rai,WiengKaen,25
+Chon Buri,WiangPaPao,71.43
+Chon Buri,BanBung,12.5
+Chon Buri,BangLamung,100
+Chon Buri,BoThong,16.67
+Chon Buri,K.KoChan,50
+Chon Buri,KoSichang,100
+Chon Buri,MuangChonBuri,55.56
+Chon Buri,NongYai,20
+Chon Buri,PhanThong,9.09
+Chon Buri,PhanatNikhom,15
+Chon Buri,Sattahip,20
+Chumphon,SiRacha,100
+Chumphon,Lamae,100
+Chumphon,LangSuan,76.92
+Chumphon,MuangChumphon,76.47
+Chumphon,Pathiu,100
+Chumphon,Phato,25
+Chumphon,Sawi,36.36
+Chumphon,ThaSae,30
+Kalasin,ThungTako,75
+Kalasin,K.DonChan,40
+Kalasin,HuaiMek,44.44
+Kalasin,HuaiPhung,0
+Kalasin,Kamalasai,50
+Kalasin,KhamMuang,16.67
+Kalasin,KhaoWong,50
+Kalasin,K.KongChai,60
+Kalasin,Kuchinarai,0
+Kalasin,MuangKalasin,29.41
+Kalasin,K.NaDu,20
+Kalasin,NaMon,0
+Kalasin,NongKungSi,22.22
+Kalasin,RongKham,33.33
+Kalasin,Sahatsakhan,0
+Kalasin,K.SamChai,75
+Kalasin,Somdet,0
+Kalasin,ThaKhantho,16.67
+Kamphaeng Phet,YangTalat,20
+Kamphaeng Phet,K.BungSamakki,50
+Kamphaeng Phet,KhanuWoralaksaburi,0
+Kamphaeng Phet,KlongKhlung,20
+Kamphaeng Phet,KlongLan,0
+Kamphaeng Phet,K.KoSamPiNakhon,33.33
+Kamphaeng Phet,LanKrabu,85.71
+Kamphaeng Phet,MueangKamphaengPhet,43.75
+Kamphaeng Phet,PangSilaThong,0
+Kamphaeng Phet,PhranKratai,20
+Kamphaeng Phet,SaiNgam,14.29
+Kanchanaburi,SaiThongWatthana,0
+Kanchanaburi,BoPhloi,66.67
+Kanchanaburi,DanMakhamTia,75
+Kanchanaburi,HuaiKrachao,100
+Kanchanaburi,LaoKhwan,0
+Kanchanaburi,MuangKanchanaburi,84.62
+Kanchanaburi,NongPrue,100
+Kanchanaburi,PhanomThuan,87.5
+Kanchanaburi,SaiYok,42.86
+Kanchanaburi,SangkhlaBuri,33.33
+Kanchanaburi,SiSawat,83.33
+Kanchanaburi,ThaMaka,88.24
+Kanchanaburi,ThaMuang,92.31
+Khon Kaen,ThongPhaPhum,28.57
+Khon Kaen,BanFang,57.14
+Khon Kaen,K.BanHaet,75
+Khon Kaen,BanPhai,10
+Khon Kaen,Chonnabot,12.5
+Khon Kaen,ChumPhae,58.33
+Khon Kaen,KhaoSuanKwang,60
+Khon Kaen,K.KhokPhoCha,75
+Khon Kaen,Kranuan,88.89
+Khon Kaen,ManchaKhiri,12.5
+Khon Kaen,MuangKhonKaen,44.44
+Khon Kaen,NamPhong,66.67
+Khon Kaen,K.NonSila,100
+Khon Kaen,K.NongNaKham,0
+Khon Kaen,NongRua,40
+Khon Kaen,NongSongHong,33.33
+Khon Kaen,Phon,25
+Khon Kaen,PhraYun,100
+Khon Kaen,PhupaMan,0
+Khon Kaen,PhuWiang,9.09
+Khon Kaen,PuaiNoi,100
+Khon Kaen,K.SamSung,40
+Khon Kaen,SiChomphu,0
+Khon Kaen,Ubolratana,16.67
+Khon Kaen,WaengNoi,66.67
+Khon Kaen,WaengYai,60
+Krabi,WiangKao,66.67
+Krabi,AoLuk,33.33
+Krabi,KhaoPhanom,50
+Krabi,KhlongThom,0
+Krabi,KoLanta,0
+Krabi,LamThap,0
+Krabi,MuangKrabi,0
+Krabi,NuaKhlong,37.5
+Lampang,PlaiPhraya,50
+Lampang,ChaeHom,0
+Lampang,HangChat,14.29
+Lampang,KoKha,33.33
+Lampang,MaeMo,40
+Lampang,MaePhrik,75
+Lampang,MaeTha,100
+Lampang,MuangLampang,63.16
+Lampang,MueangPan,60
+Lampang,Ngao,0
+Lampang,SoemNgam,0
+Lampang,SopPrap,25
+Lampang,Thoen,87.5
+Lamphun,WangNua,100
+Lamphun,BanHong,0
+Lamphun,BanThi,0
+Lamphun,Li,0
+Lamphun,MaeTha,16.67
+Lamphun,MuangLamphun,6.67
+Lamphun,PaSang,44.44
+Lamphun,ThungHuaChang,33.33
+Loei,K.WiangNongLong,0
+Loei,ChiangKhan,12.5
+Loei,DanSai,50
+Loei,K.Erawan,25
+Loei,MuangLoei,14.29
+Loei,NaDuang,0
+Loei,NaHaeo,0
+Loei,K.NongHin,0
+Loei,PakChom,0
+Loei,PhaKhao,0
+Loei,PhuKradung,0
+Loei,PhuLuang,0
+Loei,PhuRua,0
+Loei,ThaLi,66.67
+Lop Buri,WangSaphung,20
+Lop Buri,BanMi,77.27
+Lop Buri,ChaiBadan,76.47
+Lop Buri,KhokCharoen,80
+Lop Buri,KhokSamrong,61.54
+Lop Buri,LamSonthi,50
+Lop Buri,MuangLopBuri,91.67
+Lop Buri,NongMuang,50
+Lop Buri,PhatthanaNikhom,44.44
+Lop Buri,SraBoth,80
+Lop Buri,ThaLuang,100
+Mae Hong Son,ThaWung,90.91
+Mae Hong Son,KhunYuam,66.67
+Mae Hong Son,MaeLaNoi,87.5
+Mae Hong Son,MaeSariang,85.71
+Mae Hong Son,MuangMaeHongSon,71.43
+Mae Hong Son,Pai,100
+Mae Hong Son,PangMapha,0
+Maha Sarakham,SopMoei,100
+Maha Sarakham,Borabu,13.33
+Maha Sarakham,ChiangYun,75
+Maha Sarakham,K.ChunChom,75
+Maha Sarakham,KaeDam,40
+Maha Sarakham,Kantharawichai,60
+Maha Sarakham,KosumPhisai,64.71
+Maha Sarakham,K.KutRang,0
+Maha Sarakham,MuangMahaSarakam,78.57
+Maha Sarakham,NaChuak,80
+Maha Sarakham,NaDun,11.11
+Maha Sarakham,PhayakkhaphumPhisai,28.57
+Maha Sarakham,WapiPathum,80
+Mukdahan,YangSiSurat,14.29
+Mukdahan,DonTan,14.29
+Mukdahan,DongLuang,0
+Mukdahan,Khamcha-i,0
+Mukdahan,MuangMukdahan,7.69
+Mukdahan,NikhomKhamSoi,0
+Mukdahan,NongSung,0
+Nakhon Nayok,WanYai,0
+Nakhon Nayok,BanNa,0
+Nakhon Nayok,MuangNakhonNayok,15.38
+Nakhon Nayok,Ongkharak,27.27
+Nakhon Pathom,PakPhli,28.57
+Nakhon Pathom,BangLen,66.67
+Nakhon Pathom,DonTum,75
+Nakhon Pathom,KamphaengSaen,93.33
+Nakhon Pathom,MuangNakhonPathom,76
+Nakhon Pathom,NakhonChaiSi,91.67
+Nakhon Pathom,Phutthamonthon,100
+Nakhon Phanom,SamPhran,6.25
+Nakhon Phanom,BanPhaeng,0
+Nakhon Phanom,MuangNakhonPhanom,13.33
+Nakhon Phanom,NaKae,0
+Nakhon Phanom,NaThom,0
+Nakhon Phanom,NaWa,0
+Nakhon Phanom,PhonSawan,57.14
+Nakhon Phanom,PlaPak,12.5
+Nakhon Phanom,RenuNakhon,0
+Nakhon Phanom,SiSongkhram,11.11
+Nakhon Phanom,ThaUthen,0
+Nakhon Phanom,ThatPhanom,0
+Nakhon Ratchasima,K.WangYang,0
+Nakhon Ratchasima,BanLuam,75
+Nakhon Ratchasima,K.BuaLai,25
+Nakhon Ratchasima,BuaYai,20
+Nakhon Ratchasima,Chakkarat,62.5
+Nakhon Ratchasima,Chalermphrakiet,40
+Nakhon Ratchasima,ChokChai,50
+Nakhon Ratchasima,ChumPhuang,88.89
+Nakhon Ratchasima,DanKhunThot,87.5
+Nakhon Ratchasima,HuaiThalang,50
+Nakhon Ratchasima,KaengSanamNang,60
+Nakhon Ratchasima,KhamSakaesaeng,42.86
+Nakhon Ratchasima,KhamThalaSo,60
+Nakhon Ratchasima,KhonBuri,83.33
+Nakhon Ratchasima,Khong,80
+Nakhon Ratchasima,K.LamThaMenChai,50
+Nakhon Ratchasima,MuangNakhonRatchasima,40
+Nakhon Ratchasima,K.MuangYang,75
+Nakhon Ratchasima,NonDaeng,80
+Nakhon Ratchasima,NonSung,56.25
+Nakhon Ratchasima,NonThai,40
+Nakhon Ratchasima,NongBunnak,22.22
+Nakhon Ratchasima,PakChong,66.67
+Nakhon Ratchasima,PakThongChai,31.25
+Nakhon Ratchasima,Phimai,25
+Nakhon Ratchasima,K.PhraThongKham,100
+Nakhon Ratchasima,Prathai,92.31
+Nakhon Ratchasima,K.Sida,0
+Nakhon Ratchasima,Sikhiu,8.33
+Nakhon Ratchasima,SoengSang,66.67
+Nakhon Ratchasima,SungNoen,45.45
+Nakhon Ratchasima,K.ThePhaRak,25
+Nakhon Sawan,WangNumKhiaw,60
+Nakhon Sawan,BanphotPhisai,0
+Nakhon Sawan,ChumSaeng,91.67
+Nakhon Sawan,K.ChumTaBong,0
+Nakhon Sawan,KaoLieo,0
+Nakhon Sawan,KrokPhra,0
+Nakhon Sawan,LatYao,0
+Nakhon Sawan,K.MaePoen,0
+Nakhon Sawan,MaeWong,25
+Nakhon Sawan,MuangNakhonSawan,11.76
+Nakhon Sawan,NongBua,0
+Nakhon Sawan,Phaisali,0
+Nakhon Sawan,PhayuhaKhiri,81.82
+Nakhon Sawan,TakFa,0
+Nakhon Sawan,Takhli,0
+Nakhon Si Thammarat,ThaTako,40
+Nakhon Si Thammarat,BangKhan,100
+Nakhon Si Thammarat,Cha-uat,72.73
+Nakhon Si Thammarat,Chalermphrakiet,0
+Nakhon Si Thammarat,K.ChangKlang,100
+Nakhon Si Thammarat,Chawang,60
+Nakhon Si Thammarat,ChianYai,90
+Nakhon Si Thammarat,Chulaphon,0
+Nakhon Si Thammarat,HuaSai,18.18
+Nakhon Si Thammarat,Khanom,0
+Nakhon Si Thammarat,LanSaka,60
+Nakhon Si Thammarat,MuangNakhonSiThammarat,81.25
+Nakhon Si Thammarat,NaBon,0
+Nakhon Si Thammarat,K.NophiTam,25
+Nakhon Si Thammarat,PakPhanang,77.78
+Nakhon Si Thammarat,Phipun,20
+Nakhon Si Thammarat,PhraPhrom,50
+Nakhon Si Thammarat,Phrommakhiri,20
+Nakhon Si Thammarat,RonPhiPun,0
+Nakhon Si Thammarat,Sichon,22.22
+Nakhon Si Thammarat,ThaSala,70
+Nakhon Si Thammarat,ThamPhannara,100
+Nakhon Si Thammarat,ThungSong,69.23
+Nan,ThungYai,71.43
+Nan,BanLuang,0
+Nan,BoKlue,0
+Nan,Chalermphrakiet,0
+Nan,ChiangKlang,50
+Nan,MaeCharim,60
+Nan,MuangNan,9.09
+Nan,NaMun,0
+Nan,NaNoi,0
+Nan,K.PhuPieng,0
+Nan,Pua,16.67
+Nan,SantiSuk,0
+Nan,SongKwae,0
+Nan,ThaWangPha,50
+Nan,ThungChang,0
+Narathiwat,WiangSa,76.47
+Narathiwat,Bacho,50
+Narathiwat,Ja-Nae,25
+Narathiwat,Cho-I-rong,0
+Narathiwat,MuangNarathiwat,14.29
+Narathiwat,Ra-ngae,14.29
+Narathiwat,Ruso,0
+Narathiwat,SiSakhon,33.33
+Narathiwat,Su-ngaiKolok,0
+Narathiwat,Su-ngaiPadi,0
+Narathiwat,Sukhirin,0
+Narathiwat,TakBai,12.5
+Narathiwat,Waeng,50
+Nong Bua Lam Phu,Yi-ngo,16.67
+Nong Bua Lam Phu,MuangNongBuaLamPhu,26.67
+Nong Bua Lam Phu,NaKlang,0
+Nong Bua Lam Phu,NaWang,20
+Nong Bua Lam Phu,NonSang,80
+Nong Bua Lam Phu,SiBunRuang,0
+Nong Khai,SuwanKhuha,0
+Nong Khai,K.FaoRai,20
+Nong Khai,MuangNongKhai,43.75
+Nong Khai,K.PhoTak,100
+Nong Khai,PhonPhisai,63.64
+Nong Khai,K.RattanaWapi,40
+Nong Khai,K.SaKhrai,66.67
+Nong Khai,Sangkhom,0
+Nong Khai,SiChiangMai,100
+Nonthaburi,ThaBo,90
+Nonthaburi,BangBuaThong,12.5
+Nonthaburi,BangKruai,11.11
+Nonthaburi,BangYai,0
+Nonthaburi,MuangNonthaburi,10
+Nonthaburi,PakKret,8.33
+Pathum Thani,SaiNoi,0
+Pathum Thani,KhlongLuang,42.86
+Pathum Thani,LamLukKa,12.5
+Pathum Thani,LatLumKaeo,28.57
+Pathum Thani,MuangPathumThani,7.14
+Pathum Thani,NongSua,0
+Pathum Thani,SamKhok,18.18
+Pattani,Thanyaburi,83.33
+Pattani,Kapho,33.33
+Pattani,KhokPho,100
+Pattani,MaeLan,100
+Pattani,MaiKaen,75
+Pattani,Mayo,38.46
+Pattani,MuangPattani,30.77
+Pattani,NongChik,41.67
+Pattani,Panare,50
+Pattani,SaiBuri,54.55
+Pattani,ThungYangDaeng,75
+Pattani,Yarang,0
+Phangnga,Yaring,27.78
+Phangnga,Kapong,20
+Phangnga,KhuraBuri,0
+Phangnga,KoYao,0
+Phangnga,MuangPhangnga,33.33
+Phangnga,TakuaPa,75
+Phangnga,TakuaThung,71.43
+Phangnga,ThaiMuang,66.67
+Phatthalung,ThapPut,50
+Phatthalung,BangKaeo,100
+Phatthalung,KhaoChaison,80
+Phatthalung,KhuanKhanun,50
+Phatthalung,KongRa,0
+Phatthalung,MuangPhatthalung,42.86
+Phatthalung,PaBon,100
+Phatthalung,PaPayom,75
+Phatthalung,PakPhayun,57.14
+Phatthalung,SiBanphot,66.67
+Phatthalung,K.SriNakarin,75
+Phayao,Tamot,100
+Phayao,ChiangKham,60
+Phayao,ChiangMuan,66.67
+Phayao,Chun,57.14
+Phayao,DokKhamtai,75
+Phayao,MaeChai,100
+Phayao,MuangPhayao,86.67
+Phayao,K.PhuKamYao,0
+Phayao,K.PhuSang,0
+Phetchabun,Pong,42.86
+Phetchabun,BuangSamPhan,88.89
+Phetchabun,ChonDaen,33.33
+Phetchabun,KhaoKho,14.29
+Phetchabun,LomKao,44.44
+Phetchabun,LomSak,95.65
+Phetchabun,MuangPhetchabun,64.71
+Phetchabun,NamNao,100
+Phetchabun,NongPhai,76.92
+Phetchabun,SiThep,85.71
+Phetchabun,WangPong,100
+Phetchaburi,WichianBuri,50
+Phetchaburi,BanLaem,30
+Phetchaburi,BanLat,27.78
+Phetchaburi,Cha-am,33.33
+Phetchaburi,KaengKrachan,66.67
+Phetchaburi,KhaoYoi,100
+Phetchaburi,MuangPhetchaburi,20.83
+Phetchaburi,NongYaPlong,25
+Phichit,ThaYang,83.33
+Phichit,BangMunNak,60
+Phichit,K.BungNarang,100
+Phichit,K.DongCharoen,0
+Phichit,MuangPhichit,25
+Phichit,PhoPrathapChan,71.43
+Phichit,PhoThale,81.82
+Phichit,K.SakLek,40
+Phichit,SamNgam,80
+Phichit,TaphanHin,92.31
+Phichit,ThapKhlo,100
+Phichit,Wachirabarami,100
+Phitsanulok,WangSaiPhun,100
+Phitsanulok,BangKrathum,88.89
+Phitsanulok,BangRakam,63.64
+Phitsanulok,ChatTrakan,16.67
+Phitsanulok,MuangPhitsanulok,75
+Phitsanulok,NakhonThai,18.18
+Phitsanulok,NoenMaprang,14.29
+Phitsanulok,PhromPhiram,33.33
+Phitsanulok,WangThong,100
+Phra Nakhon Si Ayutthaya,WatBot,83.33
+Phra Nakhon Si Ayutthaya,BanPhraek,0
+Phra Nakhon Si Ayutthaya,BangBan,87.5
+Phra Nakhon Si Ayutthaya,BangPa-in,94.44
+Phra Nakhon Si Ayutthaya,BangPahan,23.53
+Phra Nakhon Si Ayutthaya,BangSai,24.14
+Phra Nakhon Si Ayutthaya,LatBuaLuang,42.86
+Phra Nakhon Si Ayutthaya,MahaRat,16.67
+Phra Nakhon Si Ayutthaya,NakhonLuang,33.33
+Phra Nakhon Si Ayutthaya,Phachi,100
+Phra Nakhon Si Ayutthaya,PhakHai,75
+Phra Nakhon Si Ayutthaya,PhraNakhonSiAyutthaya,4.76
+Phra Nakhon Si Ayutthaya,Sena,0
+Phra Nakhon Si Ayutthaya,ThaRua,90
+Phra Nakhon Si Ayutthaya,Uthai,27.27
+Phrae,WangNoi,40
+Phrae,DenChai,20
+Phrae,Long,0
+Phrae,MuangPhrae,75
+Phrae,NongMuangKai,83.33
+Phrae,RongKwang,54.55
+Phrae,Song,62.5
+Phrae,SungMen,33.33
+Phuket,WangChin,71.43
+Phuket,Kathu,0
+Phuket,MuangPhuket,62.5
+Prachin Buri,Thalang,33.33
+Prachin Buri,BanSang,100
+Prachin Buri,KabinBuri,92.86
+Prachin Buri,MuangPrachinBuri,61.54
+Prachin Buri,NaDi,16.67
+Prachin Buri,Prachantakham,55.56
+Prachin Buri,SriMaharPho,70
+Prachuap Khiri Khan,SiMahosot,75
+Prachuap Khiri Khan,BangSaphan,42.86
+Prachuap Khiri Khan,BangSaphanNoi,80
+Prachuap Khiri Khan,HuaHin,14.29
+Prachuap Khiri Khan,KuiBuri,16.67
+Prachuap Khiri Khan,MuangPrachuapKhiriKhan,33.33
+Prachuap Khiri Khan,PranBuri,100
+Prachuap Khiri Khan,K.SamRoiYot,100
+Ranong,ThapSakae,83.33
+Ranong,Kapoe,20
+Ranong,KraBuri,14.29
+Ranong,La-un,0
+Ranong,MuangRanong,11.11
+Ratchaburi,K.SukSamran,0
+Ratchaburi,K.BanKha,0
+Ratchaburi,BanPong,0
+Ratchaburi,BangPhae,0
+Ratchaburi,ChomBung,0
+Ratchaburi,DamnoenSaduak,0
+Ratchaburi,MuangRatchaburi,9.09
+Ratchaburi,PakTho,0
+Ratchaburi,Photharam,10.53
+Ratchaburi,SuanPhung,0
+Rayong,WatPhleng,0
+Rayong,BanChang,0
+Rayong,BanKhai,0
+Rayong,K.KhaoChamao,50
+Rayong,Klaeng,6.67
+Rayong,MuangRayong,13.33
+Rayong,K.NikhomPattan,0
+Rayong,PluakDaeng,16.67
+Roi Et,WangChan,75
+Roi Et,AtSamat,60
+Roi Et,Changhan,37.5
+Roi Et,ChaturaphakPhim,66.67
+Roi Et,K.ChiangKwan,100
+Roi Et,KasetWisai,84.62
+Roi Et,MoeiWadi,25
+Roi Et,MuangRoiEt,46.67
+Roi Et,MuangSuang,80
+Roi Et,K.NongHi,25
+Roi Et,NongPhok,66.67
+Roi Et,PathumRat,87.5
+Roi Et,PanomPhrai,46.15
+Roi Et,PhoChai,22.22
+Roi Et,PhonSai,80
+Roi Et,PhonThong,71.43
+Roi Et,Selaphum,77.78
+Roi Et,SiSomdet,100
+Roi Et,Suwannaphum,60
+Roi Et,Thawatchaburi,50
+Sa Kaeo,K.ThungKaoLua,60
+Sa Kaeo,Aranyaprathet,7.69
+Sa Kaeo,KaoChaKan,100
+Sa Kaeo,KhlongHat,0
+Sa Kaeo,K.KokSung,100
+Sa Kaeo,MuangSaKaeo,37.5
+Sa Kaeo,TaPhraya,20
+Sa Kaeo,WangNamYen,50
+Sa Kaeo,K.WangSombun,100
+Sakon Nakhon,WatthanaNakhon,36.36
+Sakon Nakhon,AkatAmnuai,50
+Sakon Nakhon,BanMuang,55.56
+Sakon Nakhon,ChareonSilp,80
+Sakon Nakhon,KhamTaKla,0
+Sakon Nakhon,KhokSriSupan,75
+Sakon Nakhon,Kusuman,60
+Sakon Nakhon,KutBak,0
+Sakon Nakhon,MuangSakonNakhon,75
+Sakon Nakhon,NikhomNamUn,50
+Sakon Nakhon,PhangKhon,60
+Sakon Nakhon,PhannaNikhom,40
+Sakon Nakhon,PhonNaKaeo,60
+Sakon Nakhon,PhuPhan,25
+Sakon Nakhon,SawangDaenDin,62.5
+Sakon Nakhon,SongDao,75
+Sakon Nakhon,TaoNgoi,50
+Sakon Nakhon,WanonNiwat,71.43
+Samut Prakan,Waritchaphum,20
+Samut Prakan,BangBo,100
+Samut Prakan,BangPlee,100
+Samut Prakan,K.BangSaoThon,33.33
+Samut Prakan,MuangSamutPrakan,84.62
+Samut Prakan,PhraPradaeng,100
+Samut Sakhon,PhraSamutJadee,80
+Samut Sakhon,BanPhaeo,41.67
+Samut Sakhon,KrathumBaen,30
+Samut Songkhram,MuangSamutSakhon,33.33
+Samut Songkhram,Amphawa,0
+Samut Songkhram,BangKhonTi,0
+Saraburi,MuangSamutSongkhram,0
+Saraburi,BanMo,22.22
+Saraburi,Chalermphrakiet,16.67
+Saraburi,DonPhut,25
+Saraburi,KaengKhoi,71.43
+Saraburi,MuakLek,16.67
+Saraburi,MuangSaraburi,36.36
+Saraburi,NongDon,0
+Saraburi,NongKhae,88.89
+Saraburi,NongSaeng,100
+Saraburi,PhraPhutthabat,22.22
+Saraburi,SaoHai,8.33
+Saraburi,WangMuang,66.67
+Satun,WihanDaeng,16.67
+Satun,KhuanDon,25
+Satun,KhuanKalong,0
+Satun,La-ngu,0
+Satun,K.MaNang,0
+Satun,MuangSatun,8.33
+Satun,ThaPhae,75
+Si Sa Ket,ThungWa,0
+Si Sa Ket,Benchalak,20
+Si Sa Ket,BungBun,50
+Si Sa Ket,HuaiThapThan,83.33
+Si Sa Ket,Kantharalak,65
+Si Sa Ket,Kanthararom,68.75
+Si Sa Ket,Khukhan,27.27
+Si Sa Ket,KhunHan,33.33
+Si Sa Ket,MuangChan,66.67
+Si Sa Ket,MuangSiSaKet,77.78
+Si Sa Ket,NamKliang,16.67
+Si Sa Ket,NonKhun,100
+Si Sa Ket,Phayu,80
+Si Sa Ket,K.PhoSiSuwan,40
+Si Sa Ket,PhraiBung,83.33
+Si Sa Ket,PhuSing,28.57
+Si Sa Ket,PrangKu,100
+Si Sa Ket,RasiSalai,23.08
+Si Sa Ket,SriRatana,85.71
+Si Sa Ket,K.SilaLat,25
+Si Sa Ket,UthumphonPhisai,57.89
+Si Sa Ket,WangHin,75
+Sing Buri,YangChumNoi,14.29
+Sing Buri,BangRachan,75
+Sing Buri,InBuri,80
+Sing Buri,KhaiBangRachan,33.33
+Sing Buri,MuangSingBuri,0
+Sing Buri,PhromBuri,14.29
+Songkhla,ThaChang,50
+Songkhla,BangKlam,0
+Songkhla,Chana,0
+Songkhla,HatYai,7.69
+Songkhla,KhlongHoiKong,0
+Songkhla,KhuanNiang,0
+Songkhla,KrasaeSinthu,0
+Songkhla,MuangSongkhla,16.67
+Songkhla,NaMom,0
+Songkhla,NaThawi,0
+Songkhla,Ranot,8.33
+Songkhla,Rattaphum,20
+Songkhla,SabaYoi,0
+Songkhla,Sadao,22.22
+Songkhla,SathingPhra,27.27
+Songkhla,Singhanakhon,0
+Sukhothai,Thepha,42.86
+Sukhothai,BanDanLanHoi,28.57
+Sukhothai,KhiriMat,0
+Sukhothai,KongKrailat,0
+Sukhothai,MuangSukhothai,20
+Sukhothai,Sawankhalok,7.14
+Sukhothai,SiNakhon,40
+Sukhothai,SiSamrong,84.62
+Sukhothai,SiSatchanalai,90.91
+Suphan Buri,ThungSaliam,20
+Suphan Buri,BangPlaMa,78.57
+Suphan Buri,DanChang,100
+Suphan Buri,DoembangNangbua,42.86
+Suphan Buri,DonChedi,100
+Suphan Buri,MuangSuphanburi,90
+Suphan Buri,NongYaSai,66.67
+Suphan Buri,SamChuk,100
+Suphan Buri,SiPrachan,88.89
+Suphan Buri,SongPhiNong,46.67
+Surat Thani,UThong,7.69
+Surat Thani,BanNaDoem,50
+Surat Thani,BanNaSan,63.64
+Surat Thani,BanTaKhun,50
+Surat Thani,ChaiBuri,25
+Surat Thani,Chaiya,22.22
+Surat Thani,DonSak,75
+Surat Thani,Kanchanadit,69.23
+Surat Thani,KhianSa,20
+Surat Thani,KhiriRatthanikhom,62.5
+Surat Thani,KoPha-ngan,0
+Surat Thani,KoSamui,42.86
+Surat Thani,MuangSuratThani,90.91
+Surat Thani,Phanom,0
+Surat Thani,Prasaeng,57.14
+Surat Thani,Phunphin,81.25
+Surat Thani,ThaChana,83.33
+Surat Thani,ThaChang,83.33
+Surat Thani,K.Wipawadi,100
+Surin,WiangSa,100
+Surin,Buachet,0
+Surin,ChomPhra,11.11
+Surin,ChumphonBuri,0
+Surin,KapChoeng,0
+Surin,K.KwaoSiNarin,0
+Surin,Lamduan,0
+Surin,MuangSurin,14.29
+Surin,K.NonNarai,20
+Surin,K.PhanomDongRak,0
+Surin,Phrasat,0
+Surin,Rattanaburi,8.33
+Surin,SamrongThap,30
+Surin,Sangkha,0
+Surin,Sanom,0
+Surin,K.SriNarong,0
+Surin,Sikhoraphum,0
+Tak,ThaTum,20
+Tak,BanTak,0
+Tak,MaeRamat,0
+Tak,MaeSot,20
+Tak,MuangTak,0
+Tak,PhopPhra,0
+Tak,SamNgao,33.33
+Tak,ThaSongYang,0
+Tak,Umphang,0
+Trang,K.WangChao,0
+Trang,K.HatSamran,33.33
+Trang,HuaiYot,75
+Trang,Kantrang,7.14
+Trang,MuangTrang,46.67
+Trang,NaYong,16.67
+Trang,Palian,10
+Trang,Rasada,0
+Trang,Sikao,20
+Trang,WangWiset,100
+Trat,YanTaKhao,50
+Trat,BoRai,40
+Trat,KhaoSaming,100
+Trat,KhlongYai,33.33
+Trat,K.KoChang,0
+Trat,K.KoKut,0
+Trat,LaemNgop,100
+Ubon Ratchathani,MuangTrat,64.29
+Ubon Ratchathani,Buntharik,62.5
+Ubon Ratchathani,DetUdom,56.25
+Ubon Ratchathani,DonMotDaeng,75
+Ubon Ratchathani,Khemarat,0
+Ubon Ratchathani,KhongChiam,0
+Ubon Ratchathani,KhuangNai,50
+Ubon Ratchathani,KutKhaopun,20
+Ubon Ratchathani,K.LaoSuaKok,75
+Ubon Ratchathani,MuangSamSip,14.29
+Ubon Ratchathani,MuangUbonRatchatani,16.67
+Ubon Ratchathani,NaChaluai,16.67
+Ubon Ratchathani,K.NaTan,0
+Ubon Ratchathani,K.NaYia,66.67
+Ubon Ratchathani,K.NamKhun,50
+Ubon Ratchathani,NamYun,28.57
+Ubon Ratchathani,PhibunMangsahan,71.43
+Ubon Ratchathani,PhoSi,100
+Ubon Ratchathani,Samrong,0
+Ubon Ratchathani,K.SawangWeeraw,100
+Ubon Ratchathani,SiMuangMai,36.36
+Ubon Ratchathani,SiRinTon,16.67
+Ubon Ratchathani,TanSum,50
+Ubon Ratchathani,ThungSiUdom,40
+Ubon Ratchathani,TrakanPhutphon,47.83
+Udon Thani,WarinChamrap,31.25
+Udon Thani,BanDung,15.38
+Udon Thani,BanPhu,23.08
+Udon Thani,ChaiWan,75
+Udon Thani,K.KuKaeo,0
+Udon Thani,Kumphawapi,0
+Udon Thani,KutChap,0
+Udon Thani,MuangUdonThani,19.05
+Udon Thani,NaYung,0
+Udon Thani,NamSom,71.43
+Udon Thani,NonSa-at,83.33
+Udon Thani,NongHan,25
+Udon Thani,NongSaeng,0
+Udon Thani,NongWuaSo,25
+Udon Thani,Phen,0
+Udon Thani,PhibunRak,66.67
+Udon Thani,K.PrachakSilapakhom,0
+Udon Thani,SangKhom,0
+Udon Thani,SiThat,14.29
+Udon Thani,ThungFon,0
+Uthai Thani,WangSamMo,33.33
+Uthai Thani,BanRai,15.38
+Uthai Thani,HuaiKhot,0
+Uthai Thani,LanSak,100
+Uthai Thani,MuangUthaiThani,7.14
+Uthai Thani,NongChang,10
+Uthai Thani,NongKhayang,0
+Uthai Thani,SawangArom,0
+Uttaradit,ThapThan,0
+Uttaradit,BanKhok,0
+Uttaradit,FakTha,0
+Uttaradit,Laplae,0
+Uttaradit,MuangUttaradit,47.06
+Uttaradit,NamPat,85.71
+Uttaradit,Phichai,63.64
+Uttaradit,ThaPla,57.14
+Uttaradit,ThongSaenKhan,25
+Yala,Tron,0
+Yala,BannangStar,33.33
+Yala,Batong,20
+Yala,Kabang,0
+Yala,K.KrongPiNung,25
+Yala,MuangYala,21.43
+Yala,Raman,6.25
+Yala,ThanTo,0
+Yasothon,Yaha,0
+Yasothon,KhamKhuanKaeo,0
+Yasothon,KhoWang,0
+Yasothon,KutChum,0
+Yasothon,LoengNokTha,0
+Yasothon,MahaChanaChai,10
+Yasothon,AmphoeMuangYasothon,11.11
+Yasothon,PaTiu,40
+Yasothon,AmphoeSaiMun,0
+#N/A,ThaiCharoen,20
