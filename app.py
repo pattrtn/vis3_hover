@@ -95,6 +95,7 @@ province_map_data = st_folium(province_map, width=800, height=600)
 
 # Handle user interaction with provinces
 if province_map_data and 'last_active_drawing' in province_map_data:
+    st.write("Debug: last_active_drawing", province_map_data['last_active_drawing'])
     clicked_province = province_map_data['last_active_drawing']
     if clicked_province:
         selected_province_name = clicked_province.get('properties', {}).get('NAME_1', 'Unknown')
@@ -105,17 +106,14 @@ if province_map_data and 'last_active_drawing' in province_map_data:
 
 # Highlight position on gradient if province is selected
 if highlight_percentage != "N/A" and highlight_percentage is not None:
-    plt.figure(figsize=(6, 0.5))
+    plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.axis("off")
+    plt.xlabel("Percentage (0-100)")
+    plt.ylabel("Intensity")
     position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
-    plt.bar(
-        [position], [1], color='black', width=5, align='center',
-        height=0.5  # Ensure the bar height fits within the gradient visualization
-    )  
+    plt.bar([position], [1], color='black', width=5, align='center')
     st.sidebar.pyplot(plt)
-
 
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
