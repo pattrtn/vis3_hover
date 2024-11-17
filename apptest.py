@@ -7,12 +7,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
-# Load the GeoJSON files
-geojson_file_path = "gadm41_THA_1.json"
+# Load the GeoJSON files for provinces and districts
+geojson_file_path = "gadm41_THA_1.json"  # Provinces
 with open(geojson_file_path, "r", encoding="utf-8") as f:
     geojson_data = json.load(f)
 
-geojson_file_path2 = "gadm41_THA_2.json"
+geojson_file_path2 = "gadm41_THA_2.json"  # Districts
 with open(geojson_file_path2, "r", encoding="utf-8") as f2:
     geojson_data2 = json.load(f2)
 
@@ -34,13 +34,10 @@ district_percentage = district_data.set_index(['Province', 'district'])['percent
 # Create a Streamlit app
 st.title("Thailand Provinces and Districts - Heatmap by Percentage")
 
-# Sidebar for data range visualization
+# Sidebar for data range visualization and color selection
 st.sidebar.header("Data Range")
-st.sidebar.markdown("### Gradient Map")
 min_percentage = 0  # Gradient starts at 0%
 max_percentage = 100  # Gradient ends at 100%
-st.sidebar.markdown(f"**Low**: {min_percentage}%")
-st.sidebar.markdown(f"**High**: {max_percentage}%")
 
 # Colormap selection for heatmap
 colormap_option = st.sidebar.selectbox(
@@ -51,19 +48,19 @@ colormap_option = st.sidebar.selectbox(
 # Convert the selected colormap to a matplotlib colormap object
 cmap = plt.get_cmap(colormap_option)
 
-# Dropdown for selecting a region (province or district)
+# Dropdown for selecting a region type (province or district)
 region_type = st.selectbox("Select Region Type", ["Province", "District"])
 
 # Initialize variables for selected province or district
 selected_province = None
 selected_district = None
 
-# Dropdown for selecting a province
+# Dropdown for selecting a province if the region type is "Province"
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
 if region_type == "Province":
     selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 
-# Dropdown for selecting a district (only when "District" is selected in dropdown)
+# Dropdown for selecting a district if the region type is "District"
 district_list = []
 if region_type == "District" and selected_province:
     district_list = sorted(list(set(district_data[district_data['Province'] == selected_province]['district'])))
@@ -95,55 +92,40 @@ elif region_type == "District":
     else:
         geojson_data2["features"] = geojson_data2["features"]
 
-# Add the relevant polygons (for provinces or districts)
-for feature in geojson_data["features"]:
-    name = feature["properties"]["NAME_1"]
-    percentage = province_percentage.get(name, "N/A")
-    
-    # Assign color based on the percentage
-    if percentage == "N/A":
-        color = "#D3D3D3"  # light grey for N/A
-    else:
-        color = cmap(percentage / 100)
-    
-    # Create GeoJson for the province with valid color
-    geojson = folium.GeoJson(
-        feature,
-        tooltip=f"{name}: {percentage}%",
-        style_function=lambda x, color=color: {
-            "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else color,  # Use color if valid tuple
-            "color": "black",
-            "weight": 1,
-            "fillOpacity": 0.5,
-        }
-    )
-    geojson.add_to(region_map)
+# Add polygons for provinces or districts to the map
+def add_geojson_to_map(features, percentage_dict, region_type):
+    for feature in features:
+        if region_type == "Province":
+            region_name = feature["properties"]["NAME_1"]
+        elif region_type == "District":
+            region_name = feature["properties"]["NAME_2"]
+        
+        percentage = percentage_dict.get(region_name, "N/A")
+        
+        # Assign color based on percentage
+        if percentage == "N/A":
+            color = "#D3D3D3"  # light grey for N/A
+        else:
+            color = cmap(percentage / 100)
+        
+        folium.GeoJson(
+            feature,
+            tooltip=f"{region_name}: {percentage}%",
+            style_function=lambda x, color=color: {
+                "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else color,
+                "color": "black",
+                "weight": 1,
+                "fillOpacity": 0.5,
+            }
+        ).add_to(region_map)
 
-# Add the district polygons if district is selected
-for feature in geojson_data2["features"]:
-    province_name = feature["properties"]["NAME_1"]
-    district_name = feature["properties"]["NAME_2"]
-    percentage = district_percentage.get((province_name, district_name), "N/A")
-    
-    # Assign color based on the percentage
-    if percentage == "N/A":
-        color = "#D3D3D3"  # light grey for N/A
-    else:
-        color = cmap(percentage / 100)
-    
-    # Create GeoJson for the district with valid color
-    folium.GeoJson(
-        feature,
-        tooltip=f"{district_name}: {percentage}%",
-        style_function=lambda x, color=color: {
-            "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else color,  # Use color if valid tuple
-            "color": "black",
-            "weight": 1,
-            "fillOpacity": 0.5,
-        }
-    ).add_to(region_map)
+# Add appropriate polygons based on region selection
+if region_type == "Province":
+    add_geojson_to_map(geojson_data["features"], province_percentage, "Province")
+elif region_type == "District":
+    add_geojson_to_map(geojson_data2["features"], district_percentage, "District")
 
-# Display the combined map
+# Display the map in Streamlit
 st.subheader("Region Heatmap")
 st_folium(region_map, width=800, height=600)
 
