@@ -32,7 +32,11 @@ province_percentage = province_data.set_index('Province')['percentage_true'].to_
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
 # Streamlit App
-st.title("Thailand Provinces and Districts - Heatmap by Percentage")
+st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
+st.markdown("[Predict Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app/)!")
+st.markdown(
+    """The model is a simple CRF that takes a string and tags each token as LOC (tambon, amphoe, or province), POST (postal code), ADDR (other address element), or O (the rest)."""
+)
 
 # Sidebar for data range visualization
 st.sidebar.header("Data Range")
