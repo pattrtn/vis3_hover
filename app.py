@@ -99,19 +99,16 @@ for feature in geojson_data["features"]:
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
-# Check if a polygon is clicked
-if province_map_data and 'last_clicked' in province_map_data:
-    clicked = True
-    lat, lng = province_map_data['last_clicked']['lat'], province_map_data['last_clicked']['lng']
-    point = Point(lng, lat)
+# Check if a tooltip is shown
+if province_map_data:
     for feature in geojson_data["features"]:
-        polygon = shape(feature["geometry"])
-        if polygon.contains(point):
-            clicked_province_name = feature["properties"]["NAME_1"]
-            highlight_percentage = province_percentage.get(clicked_province_name.replace(' ', ''), 'N/A')
+        tooltip_text = f"{feature['properties']['NAME_1']}: {province_percentage.get(feature['properties']['NAME_1'], 'N/A')}%"
+        if tooltip_text in province_map_data.get('last_tooltip', ''):
+            clicked = True
+            highlight_percentage = province_percentage.get(feature['properties']['NAME_1'].replace(' ', ''), 'N/A')
             break
 
-# Highlight position on gradient if a polygon is clicked
+# Highlight position on gradient if a tooltip is shown
 if clicked and highlight_percentage != "N/A" and highlight_percentage is not None:
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
