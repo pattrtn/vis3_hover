@@ -32,7 +32,13 @@ province_percentage = province_data.set_index('Province')['percentage_true'].to_
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
 # Create a Streamlit app
-st.title("Thailand Provinces and Districts - Heatmap by Percentage")
+st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
+st.markdown("[Prediction Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app//) for trying this model!")
+st.markdown(
+    """This map visualizes the accuracy percentage of data across Thailand’s provinces and districts. 
+    Each region is color-coded based on the accuracy of the information associated with it, 
+    providing a clear and intuitive way to assess the quality of data at both the provincial and district levels.."""
+)
 
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
