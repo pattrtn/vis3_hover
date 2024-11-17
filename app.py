@@ -67,7 +67,6 @@ if selected_province != "All":
         if feature["properties"]["NAME_1"] == selected_province
     ]
     highlight_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
-    st.write("Highlight Percentage (Selected Province):", highlight_percentage)
 
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
@@ -99,18 +98,15 @@ for feature in geojson_data["features"]:
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
-st.write("Debug: province_map_data", province_map_data)  # Debug province_map_data
 
 # Handle user interaction with provincesa
 if province_map_data and 'last_active_drawing' in province_map_data:
-    st.write("Debug: 'last_active_drawing' in province_map_data")  # Debug 'last_active_drawing'
     clicked_province = province_map_data['last_active_drawing']
     if clicked_province:
         selected_province_name = clicked_province.get('properties', {}).get('NAME_1', 'Unknown')
         highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
         st.sidebar.markdown(f"**Clicked Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
-        st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
 
 # Highlight position on gradient if province is selected
 if highlight_percentage != "N/A" and highlight_percentage is not None:
