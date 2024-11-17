@@ -67,6 +67,8 @@ if selected_province != "All":
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
 # Add GeoJSON polygons with tooltips and percentage data for provinces
+selected_province_percentage = None
+
 def get_tooltip_text_province(name):
     percentage = province_percentage.get(name, "N/A")  # Default to "N/A" if not found
     return f"{name}: {percentage}%"
@@ -87,6 +89,11 @@ def get_color_province(percentage):
     hex_color = mcolors.rgb2hex(rgba_color[:3])
     return hex_color
 
+def on_click_province(feature):
+    global selected_province_percentage
+    name = feature["properties"]["NAME_1"]
+    selected_province_percentage = province_percentage.get(name, "N/A")
+
 for feature in geojson_data["features"]:
     name = feature["properties"]["NAME_1"]  # Extract province name
     tooltip_text = get_tooltip_text_province(name)
@@ -101,11 +108,17 @@ for feature in geojson_data["features"]:
             "weight": 1,
             "fillOpacity": 0.5,
         },
+        highlight_function=lambda x: {"fillColor": "yellow", "color": "black", "weight": 3},
+        on_click=lambda x=feature: on_click_province(x),
     ).add_to(province_map)
 
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 st_folium(province_map, width=800, height=600)
+
+# Display selected province percentage in sidebar if clicked
+if selected_province_percentage is not None:
+    st.sidebar.markdown(f"**Selected Province Percentage**: {selected_province_percentage}%")
 
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
