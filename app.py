@@ -80,13 +80,14 @@ for feature in geojson_data["features"]:
     color = "grey" if percentage == "N/A" else plt.get_cmap("RdYlBu")(percentage / 100)
 
     # Add a click listener to GeoJson
-    # Example visualization
+
+    # Example visualization in the sidebar
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
     plt.xlabel("Percentage (0-100)")
     plt.ylabel("Intensity")
-    position = float(percentage if percentage != "N/A" else 0) / 100 * 256  # Normalize percentage to 256-pixel width
+    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
     plt.bar([position], [1], color='black', width=5, align='center')
     st.sidebar.pyplot(plt)
     geojson = folium.GeoJson(
