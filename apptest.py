@@ -117,6 +117,12 @@ if province_map_data and 'last_active_drawing' in province_map_data:
         st.sidebar.markdown(f"**Clicked Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
 
+# **District Selection**
+district_percentage_value = "N/A"
+if district_selected and district_selected != "None":
+    # Get the percentage for the selected district
+    district_percentage_value = district_percentage.get((selected_province, district_selected), "N/A")
+
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
@@ -144,7 +150,6 @@ st.subheader("Districts Heatmap")
 district_map_data = st_folium(district_map, width=800, height=600)
 
 # Handle user interaction with districts
-district_percentage_value = "N/A"
 if district_map_data and 'last_active_drawing' in district_map_data:
     clicked_district = district_map_data['last_active_drawing']
     if clicked_district:
@@ -155,7 +160,7 @@ if district_map_data and 'last_active_drawing' in district_map_data:
         st.sidebar.markdown(f"**Clicked District**: {clicked_district_name}")
         st.sidebar.markdown(f"**District Percentage**: {district_percentage_value}%")
 
-# Highlight position on gradient if district is selected
+# Highlight position on gradient for district if selected
 if district_percentage_value != "N/A" and district_percentage_value is not None:
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
@@ -165,3 +170,10 @@ if district_percentage_value != "N/A" and district_percentage_value is not None:
     position = float(district_percentage_value) / 100 * 256  # Normalize percentage to 256-pixel width
     plt.bar([position], [1], color='black', width=5, align='center')
     st.sidebar.pyplot(plt)
+
+# Show the province gradient scale in the sidebar
+if selected_province != "All":
+    st.sidebar.markdown("### Province Scale")
+    plt.figure(figsize=(6, 1))
+    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient_array, aspect="auto", cmap=cmap
