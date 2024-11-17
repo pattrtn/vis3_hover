@@ -51,17 +51,6 @@ colormap_option = st.sidebar.selectbox(
 # Use the selected colormap
 cmap = plt.get_cmap(colormap_option)
 
-# Display the colormap gradient in the sidebar
-gradient = np.linspace(0, 1, 256).reshape(1, -1)
-
-# Create the plot correctly before showing it on Streamlit
-fig, ax = plt.subplots(figsize=(6, 0.5))
-ax.imshow(gradient, aspect="auto", cmap=cmap)
-ax.axis("off")  # Hide the axes
-
-# Display the gradient color scale in the sidebar
-st.sidebar.pyplot(fig)
-
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
 selected_province = st.selectbox("Select a Province", ["All"] + province_list)
