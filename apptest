@@ -128,8 +128,18 @@ st.subheader("Districts Heatmap")
 st_folium(district_map, width=800, height=600)
 
 
-# Sidebar for data range visualization and province selection
-st.sidebar.header("Data Range and Province Selection")
-min_percentage = min(province_data['percentage_true'].min(), district_data['percentage_true'].min())
-max_percentage = max(province_data['percentage_true'].max(), district_data['percentage_true'].max())
-st.sidebar.markdown(f"**Low**: {min
+# Handle user interaction with provinces
+if province_map_data and 'last_active_drawing' in province_map_data:
+    clicked_province = province_map_data['last_active_drawing']
+    if clicked_province and 'properties' in clicked_province:
+        selected_province_name = clicked_province['properties'].get('NAME_1', 'Unknown')
+        highlight_percentage = province_percentage.get(selected_province_name, 'N/A')
+
+        # Update selected province dropdown in sidebar
+        selected_province = st.sidebar.selectbox("Select a Province", 
+                                                 ["All"] + province_list, 
+                                                 index=province_list.index(selected_province_name) 
+                                                 if selected_province_name in province_list else 0)
+
+        st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
+        st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
