@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+from shapely.geometry import shape, Point
 
 # Load the GeoJSON file
 geojson_file_path = "gadm41_THA_1.json"
@@ -99,14 +100,28 @@ for feature in geojson_data["features"]:
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
-# Handle user interaction with provincesa
-if province_map_data and 'last_active_drawing' in province_map_data:
-    clicked_province = province_map_data['last_active_drawing']
-    if clicked_province:
-        selected_province_name = clicked_province.get('properties', {}).get('NAME_1', 'Unknown')
-        highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
-        st.sidebar.markdown(f"**Clicked Province**: {selected_province_name}")
-        st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
+# Handle user interaction with provinces
+if province_map_data:
+    clicked_coordinates = province_map_data.get('last_clicked', None)
+    if clicked_coordinates:
+        lat, lng = clicked_coordinates['lat'], clicked_coordinates['lng']
+        point = Point(lng, lat)  # Convert lat, lng to a shapely Point
+
+        clicked_province_name = None
+        for feature in geojson_data["features"]:
+            polygon = shape(feature["geometry"])  # Create a shapely Polygon
+            if polygon.contains(point):  # Check if the point is inside the polygon
+                clicked_province_name = feature["properties"]["NAME_1"]
+                break
+
+        if clicked_province_name:
+            highlight_percentage = province_percentage.get(clicked_province_name.replace(' ', ''), 'N/A')
+            st.sidebar.markdown(f"**Clicked Province**: {clicked_province_name}")
+            st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
+        else:
+            st.sidebar.markdown("**Clicked Location is Outside of Provinces**")
+    else:
+        st.sidebar.markdown("**No Location Clicked**")
 
 # Highlight position on gradient if province is selected
 if highlight_percentage != "N/A" and highlight_percentage is not None:
