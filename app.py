@@ -49,13 +49,13 @@ selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 
 # Filter GeoJSON data by selected province
 highlight_percentage = None
-clicked = False
 if selected_province == "All":
     # Show gradient map without bar if "All" is selected
     plt.figure(figsize=(6, 0.5))
     gradient = np.linspace(0, 1, 256).reshape(1, -1)
     plt.imshow(gradient, aspect="auto", cmap=plt.get_cmap("RdYlBu"))
-    plt.axis("off")
+    plt.xlabel("Percentage (0-100)")
+    plt.ylabel("Intensity")
     st.sidebar.pyplot(plt)
 else:
     geojson_data["features"] = [
@@ -99,7 +99,7 @@ province_map_data = st_folium(province_map, width=800, height=600)
 st.write("Debug: province_map_data", province_map_data)
 
 # Highlight position on gradient if a tooltip is shown
-if clicked and highlight_percentage != "N/A" and highlight_percentage is not None:
+if highlight_percentage != "N/A" and highlight_percentage is not None:
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
