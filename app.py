@@ -35,7 +35,7 @@ district_percentage = district_data.set_index(['Province', 'district'])['percent
 st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
 st.markdown("[Prediction Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app//) for trying this model!")
 st.markdown(
-    """This map visualizes show the accuracy percentage of data across Thailand’s provinces and districts. 
+    """This map visualizes the accuracy percentage of data across Thailand’s provinces and districts. 
     Each region is color-coded based on the accuracy of the information associated with it, 
     providing a clear and intuitive way to assess the quality of data at both the provincial and district levels.."""
 )
@@ -73,7 +73,7 @@ def get_color_province(percentage):
     normalized_percentage = np.clip(percentage / 100, 0, 1)
 
     # Use matplotlib's 'Reds' colormap (from white to red)
-    cmap = plt.get_cmap("seismic")
+    cmap = plt.get_cmap("RdGy")
     rgba_color = cmap(normalized_percentage)
     
     # Convert the RGBA color to hex
