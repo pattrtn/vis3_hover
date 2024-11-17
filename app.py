@@ -36,8 +36,9 @@ st.title("Thailand Provinces and Districts - Heatmap by Percentage")
 
 # Sidebar for data range visualization
 st.sidebar.header("Data Range")
-min_percentage = min(province_data['percentage_true'].min(), district_data['percentage_true'].min())
-max_percentage = max(province_data['percentage_true'].max(), district_data['percentage_true'].max())
+st.sidebar.markdown("### Gradient Map")
+min_percentage = 0  # Gradient starts at 0%
+max_percentage = 100  # Gradient ends at 100%
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
 # Use RdYlBu colormap as an image in the sidebar
@@ -45,6 +46,7 @@ cmap = plt.get_cmap("RdYlBu")
 gradient = np.linspace(0, 1, 256).reshape(1, -1)
 plt.figure(figsize=(6, 0.5))
 plt.imshow(gradient, aspect="auto", cmap=cmap)
+plt.axis("off")
 st.sidebar.pyplot(plt)
 
 # Dropdown for selecting a province
