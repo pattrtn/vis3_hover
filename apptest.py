@@ -53,9 +53,11 @@ if selected_province == "All":
     # Show gradient map without bar if "All" is selected
     plt.figure(figsize=(6, 0.5))
     gradient = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient, aspect="auto", cmap=cmap)
+    im = plt.imshow(gradient, aspect="auto", cmap=cmap)  # Ensure we capture the image object
     plt.xlabel("Percentage (0-100)")
     plt.ylabel("Intensity")
+    plt.colorbar(im)  # Add a color bar to the gradient map
+    st.sidebar.subheader("Province Color Scale")
     st.sidebar.pyplot(plt)
 else:
     geojson_data["features"] = [
@@ -101,11 +103,12 @@ province_map_data = st_folium(province_map, width=800, height=600)
 if highlight_percentage != "N/A" and highlight_percentage is not None:
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
+    im = plt.imshow(gradient_array, aspect="auto", cmap=cmap)  # Ensure we capture the image object
     plt.xlabel("Percentage (0-100)")
     plt.ylabel("Intensity")
     position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
     plt.bar([position], [1], color='black', width=5, align='center')
+    plt.colorbar(im)  # Add a color bar to the gradient map
     st.sidebar.subheader("Province Color Scale")
     st.sidebar.pyplot(plt)
 
@@ -141,9 +144,10 @@ if selected_province != "All":
     position = float(district_percentage.get((selected_province, "district_name"), 0)) / 100 * 256
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
+    im = plt.imshow(gradient_array, aspect="auto", cmap=cmap)  # Ensure we capture the image object
     plt.xlabel("Percentage (0-100)")
     plt.ylabel("Intensity")
     plt.bar([position], [1], color='black', width=5, align='center')
+    plt.colorbar(im)  # Add a color bar to the gradient map
     st.sidebar.subheader("District Color Scale")
     st.sidebar.pyplot(plt)
