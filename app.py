@@ -43,15 +43,6 @@ max_percentage = 100  # Gradient ends at 100%
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
 
-# Use RdYlBu colormap as an image in the sidebar only if no province is selected
-cmap = plt.get_cmap("RdYlBu")
-gradient = np.linspace(0, 1, 256).reshape(1, -1)
-if 'selected_province' in locals() and selected_province == "All":
-    plt.figure(figsize=(6, 0.5))
-    plt.imshow(gradient, aspect="auto", cmap=cmap)
-    plt.axis("off")
-    st.sidebar.pyplot(plt)
-
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
 selected_province = st.selectbox("Select a Province", ["All"] + province_list)
@@ -69,6 +60,13 @@ if selected_province != "All":
         if feature["properties"]["NAME_1"] == selected_province
     ]
     highlight_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
+else:
+    # Show gradient map without bar if "All" is selected
+    plt.figure(figsize=(6, 0.5))
+    gradient = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient, aspect="auto", cmap=plt.get_cmap("RdYlBu"))
+    plt.axis("off")
+    st.sidebar.pyplot(plt)
 
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
