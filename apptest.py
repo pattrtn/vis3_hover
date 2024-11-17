@@ -107,14 +107,18 @@ if province_map_data and 'last_active_drawing' in province_map_data:
     if clicked_province and 'properties' in clicked_province:
         selected_province_name = clicked_province['properties'].get('NAME_1', 'Unknown')
         highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
+        
+        # Display dynamic information in the sidebar in line format
         st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
         
-        # Additional details about the province
-        location = f"Latitude: {clicked_province['geometry']['coordinates'][0][0][1]}, Longitude: {clicked_province['geometry']['coordinates'][0][0][0]}"
+        # Additional details about the province (using location from coordinates)
+        coordinates = feature["geometry"]["coordinates"][0][0]  # Get first coordinate point
+        location = f"Latitude: {coordinates[1]}, Longitude: {coordinates[0]}"
+        
         st.sidebar.markdown(f"**Location**: {location}")
-        st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
-
+        st.write(f"Highlight Percentage (Clicked Province): {highlight_percentage}%")
+        
 # Highlight position on gradient
 if highlight_percentage != "N/A" and highlight_percentage is not None:
     plt.figure(figsize=(6, 0.5))
