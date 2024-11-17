@@ -55,12 +55,12 @@ colormap_option = st.sidebar.selectbox(
 
 # Use RdYlBu colormap as an image in the sidebar only if no province is selected
 cmap = plt.get_cmap(colormap_option)
-gradient = np.linspace(0, 1, 256).reshape(1, -1)
-if 'selected_province' in locals() and selected_province == "All":
-    plt.figure(figsize=(6, 0.5))
-    plt.imshow(gradient, aspect="auto", cmap=cmap)
-    plt.axis("off")
-    st.sidebar.pyplot(plt)
+# gradient = np.linspace(0, 1, 256).reshape(1, -1)
+# if 'selected_province' in locals() and selected_province == "All":
+#     plt.figure(figsize=(6, 0.5))
+#     plt.imshow(gradient, aspect="auto", cmap=cmap)
+#     plt.axis("off")
+#     st.sidebar.pyplot(plt)
 
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
