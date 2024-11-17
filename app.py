@@ -40,7 +40,12 @@ min_percentage = min(province_data['percentage_true'].min(), district_data['perc
 max_percentage = max(province_data['percentage_true'].max(), district_data['percentage_true'].max())
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
-st.sidebar.color_picker("Color Range", "#FF0000")
+# Use RdYlBu colormap as an image in the sidebar
+cmap = plt.get_cmap("RdYlBu")
+gradient = np.linspace(0, 1, 256).reshape(1, -1)
+plt.figure(figsize=(6, 0.5))
+plt.imshow(gradient, aspect="auto", cmap=cmap)
+st.sidebar.pyplot(plt)
 
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
@@ -74,7 +79,7 @@ def get_color_province(percentage):
     percentage = float(percentage)
     normalized_percentage = np.clip(percentage / 100, 0, 1)
 
-    # Use matplotlib's 'Reds' colormap (from white to red)
+    # Use matplotlib's 'RdYlBu' colormap
     cmap = plt.get_cmap("RdYlBu")
     rgba_color = cmap(normalized_percentage)
     
