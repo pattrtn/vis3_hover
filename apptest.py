@@ -143,3 +143,28 @@ if province_map_data and 'last_active_drawing' in province_map_data:
 
         st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
+
+
+# Filter GeoJSON data and district data by selected province
+if selected_province != "All":
+    geojson_data2["features"] = [
+        feature for feature in geojson_data2["features"]
+        if feature["properties"]["NAME_1"] == selected_province
+    ]
+    district_data = district_data[district_data['Province'] == selected_province.replace(' ', '')]
+
+# Initialize the district map (update with filtered data)
+district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
+
+# ... rest of the code for adding GeoJSON polygons to district map
+
+# Define a function to update heatmap color scale based on selected province data
+def update_heatmap_colors(province_data, min_percentage, max_percentage):
+    # ... code to analyze province data and adjust min/max percentages
+    # ... code to update colormap based on adjusted min/max percentages
+    return cmap
+
+# Update colormap for province map based on selected province
+if selected_province != "All":
+    province_data_subset = province_data[province_data['Province'] == selected_province.replace(' ', '')]
+    cmap = update_heatmap_colors(province_data_subset, min_percentage, max_percentage)
