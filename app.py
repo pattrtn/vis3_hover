@@ -90,22 +90,23 @@ st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
 # Handle user interaction with provinces
+highlight_percentage = None
 if province_map_data and 'last_active_drawing' in province_map_data:
     clicked_province = province_map_data['last_active_drawing']
     if clicked_province and 'properties' in clicked_province:
         selected_province_name = clicked_province['properties'].get('NAME_1', 'Unknown')
-        selected_province_percentage = province_percentage.get(selected_province_name, 'N/A')
+        highlight_percentage = province_percentage.get(selected_province_name, 'N/A')
         st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
-        st.sidebar.markdown(f"**Percentage**: {selected_province_percentage}%")
+        st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
 
-        # Highlight position on gradient
-        if selected_province_percentage != "N/A":
-            plt.figure(figsize=(6, 0.5))
-            plt.imshow(gradient, aspect="auto", cmap=cmap)
-            plt.axis("off")
-            position = float(selected_province_percentage) / 100 * 255
-            plt.scatter([position], [0], color='black', s=50, zorder=5)
-            st.sidebar.pyplot(plt)
+# Highlight position on gradient
+if highlight_percentage != "N/A" and highlight_percentage is not None:
+    plt.figure(figsize=(6, 0.5))
+    plt.imshow(gradient, aspect="auto", cmap=cmap)
+    plt.axis("off")
+    position = float(highlight_percentage) / 100 * 255  # Normalize percentage to 256-pixel width
+    plt.scatter([position], [0.5], color='black', s=100, zorder=5)  # Add black point to gradient
+    st.sidebar.pyplot(plt)
 
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
