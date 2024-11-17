@@ -60,6 +60,13 @@ def add_districts_to_map(selected_province, selected_district):
     return district_map
 
 # Streamlit code for handling map updates based on district selection
+
+# Get selected province and district from the dropdowns
+selected_province = st.selectbox("Select a Province", ["All"] + province_list)
+district_list = sorted(list(set(district_data[district_data['Province'] == selected_province]['district'])))
+selected_district = st.selectbox("Select a District", ["All"] + district_list)
+
+# Now, we call the map function with the selected parameters
 district_map = add_districts_to_map(selected_province, selected_district)
 
 # Show the updated map
