@@ -119,31 +119,48 @@ if province_map_data and 'last_active_drawing' in province_map_data:
 
 # **District Selection**
 district_percentage_value = "N/A"
-if district_selected and district_selected != "None":
-    # Get the percentage for the selected district
-    district_percentage_value = district_percentage.get((selected_province, district_selected), "N/A")
-
-# Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
-# Add GeoJSON polygons with tooltips and percentage data for districts
-for feature in geojson_data2["features"]:
-    province_name = feature["properties"]["NAME_1"]
-    district_name = feature["properties"]["NAME_2"]
-    percentage = district_percentage.get((province_name, district_name), "N/A")
-    tooltip_text = f"{district_name}: {percentage}%"
-    color = "grey" if percentage == "N/A" else cmap(percentage / 100)  # Use the selected colormap
-    
-    folium.GeoJson(
-        feature,
-        tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
-        style_function=lambda x, color=color: {
-            "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else "grey",
-            "color": "black",
-            "weight": 1,
-            "fillOpacity": 0.5,
-        }
-    ).add_to(district_map)
+# Show only the selected district if a district is selected
+if district_selected and district_selected != "None":
+    # Filter the geojson data to show only the selected district
+    for feature in geojson_data2["features"]:
+        province_name = feature["properties"]["NAME_1"]
+        district_name = feature["properties"]["NAME_2"]
+        if district_name == district_selected:
+            percentage = district_percentage.get((province_name, district_name), "N/A")
+            tooltip_text = f"{district_name}: {percentage}%"
+            color = "grey" if percentage == "N/A" else cmap(percentage / 100)  # Use the selected colormap
+
+            folium.GeoJson(
+                feature,
+                tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
+                style_function=lambda x, color=color: {
+                    "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else "grey",
+                    "color": "black",
+                    "weight": 1,
+                    "fillOpacity": 0.5,
+                }
+            ).add_to(district_map)
+else:
+    # Show all districts within the selected province if no district is selected
+    for feature in geojson_data2["features"]:
+        if feature["properties"]["NAME_1"] == selected_province:
+            district_name = feature["properties"]["NAME_2"]
+            percentage = district_percentage.get((selected_province, district_name), "N/A")
+            tooltip_text = f"{district_name}: {percentage}%"
+            color = "grey" if percentage == "N/A" else cmap(percentage / 100)  # Use the selected colormap
+
+            folium.GeoJson(
+                feature,
+                tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
+                style_function=lambda x, color=color: {
+                    "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else "grey",
+                    "color": "black",
+                    "weight": 1,
+                    "fillOpacity": 0.5,
+                }
+            ).add_to(district_map)
 
 # Display the district map in Streamlit
 st.subheader("Districts Heatmap")
@@ -167,18 +184,6 @@ if district_percentage_value != "N/A" and district_percentage_value is not None:
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
     plt.xlabel("Percentage (0-100)")
     plt.ylabel("Intensity")
-    position = float(district_percentage_value) / 100 * 256  # Normalize percentage to 256-pixel width
-    plt.bar([position], [1], color='black', width=5, align='center')
-    st.sidebar.pyplot(plt)
-
-# Show the province gradient scale in the sidebar
-if selected_province != "All":
-    st.sidebar.markdown("### Province Scale")
-    plt.figure(figsize=(6, 1))
-    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.xlabel("Percentage (0-100)")
-    plt.ylabel("Intensity")
-    position = float(highlight_percentage) / 100 * 256  # Normalize province percentage
+    position = float(district_percentage_value) / 100 * 256  # Normalize district percentage
     plt.bar([position], [1], color='black', width=5, align='center')
     st.sidebar.pyplot(plt)
