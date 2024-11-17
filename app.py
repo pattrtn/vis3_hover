@@ -32,13 +32,15 @@ province_percentage = province_data.set_index('Province')['percentage_true'].to_
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
 # Create a Streamlit app
-st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
-st.markdown("[Prediction Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app//) for trying this model!")
-st.markdown(
-    """This map visualizes the accuracy percentage of data across Thailand’s provinces and districts. 
-    Each region is color-coded based on the accuracy of the information associated with it, 
-    providing a clear and intuitive way to assess the quality of data at both the provincial and district levels.."""
-)
+st.title("Thailand Provinces and Districts - Heatmap by Percentage")
+
+# Sidebar for data range visualization
+st.sidebar.header("Data Range")
+min_percentage = min(province_data['percentage_true'].min(), district_data['percentage_true'].min())
+max_percentage = max(province_data['percentage_true'].max(), district_data['percentage_true'].max())
+st.sidebar.markdown(f"**Low**: {min_percentage}%")
+st.sidebar.markdown(f"**High**: {max_percentage}%")
+st.sidebar.color_picker("Color Range", "#FF0000")
 
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
@@ -73,7 +75,7 @@ def get_color_province(percentage):
     normalized_percentage = np.clip(percentage / 100, 0, 1)
 
     # Use matplotlib's 'Reds' colormap (from white to red)
-    cmap = plt.get_cmap("RdYlBu")
+    cmap = plt.get_cmap("Reds")
     rgba_color = cmap(normalized_percentage)
     
     # Convert the RGBA color to hex
