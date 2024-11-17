@@ -100,16 +100,6 @@ st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 st.write("Debug: province_map_data", province_map_data)
 
-# Check if a tooltip is shown
-if province_map_data:
-    st.write("Debug: Checking tooltip and province_map_data")
-    for feature in geojson_data["features"]:
-        tooltip_text = f"{feature['properties']['NAME_1']}: {province_percentage.get(feature['properties']['NAME_1'], 'N/A')}%"
-        if tooltip_text in province_map_data.get('last_tooltip', ''):
-            clicked = True
-            highlight_percentage = province_percentage.get(feature['properties']['NAME_1'].replace(' ', ''), 'N/A')
-            break
-
 # Highlight position on gradient if a tooltip is shown
 if clicked and highlight_percentage != "N/A" and highlight_percentage is not None:
     plt.figure(figsize=(6, 1))
