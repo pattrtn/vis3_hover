@@ -58,6 +58,7 @@ selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 
 # Filter GeoJSON data by selected province
 highlight_percentage = None
+clicked = False
 if selected_province != "All":
     geojson_data["features"] = [
         feature for feature in geojson_data["features"]
@@ -79,17 +80,6 @@ for feature in geojson_data["features"]:
     percentage = province_percentage.get(name, "N/A")
     color = "grey" if percentage == "N/A" else plt.get_cmap("RdYlBu")(percentage / 100)
 
-    # Add a click listener to GeoJson
-
-    # Example visualization in the sidebar
-    plt.figure(figsize=(6, 1))
-    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.xlabel("Percentage (0-100)")
-    plt.ylabel("Intensity")
-    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
-    plt.bar([position], [1], color='black', width=5, align='center')
-    st.sidebar.pyplot(plt)
     geojson = folium.GeoJson(
         feature,
         tooltip=tooltip_text,  # Set the tooltip to display NAME_1 and percentage
@@ -105,13 +95,24 @@ for feature in geojson_data["features"]:
     )
     geojson.add_to(province_map)
 
-
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
-# Highlight position on gradient if province is selected
-if highlight_percentage != "N/A" and highlight_percentage is not None:
+# Check if a polygon is clicked
+if province_map_data and 'last_clicked' in province_map_data:
+    clicked = True
+    lat, lng = province_map_data['last_clicked']['lat'], province_map_data['last_clicked']['lng']
+    point = Point(lng, lat)
+    for feature in geojson_data["features"]:
+        polygon = shape(feature["geometry"])
+        if polygon.contains(point):
+            clicked_province_name = feature["properties"]["NAME_1"]
+            highlight_percentage = province_percentage.get(clicked_province_name.replace(' ', ''), 'N/A')
+            break
+
+# Highlight position on gradient if a polygon is clicked
+if clicked and highlight_percentage != "N/A" and highlight_percentage is not None:
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
