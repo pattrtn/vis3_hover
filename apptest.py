@@ -7,7 +7,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
-
 # Load the GeoJSON file
 geojson_file_path = "gadm41_THA_1.json"
 with open(geojson_file_path, "r", encoding="utf-8") as f:
@@ -110,6 +109,10 @@ if province_map_data and 'last_active_drawing' in province_map_data:
         highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
         st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
+        
+        # Additional details about the province
+        location = f"Latitude: {clicked_province['geometry']['coordinates'][0][0][1]}, Longitude: {clicked_province['geometry']['coordinates'][0][0][0]}"
+        st.sidebar.markdown(f"**Location**: {location}")
         st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
 
 # Highlight position on gradient
