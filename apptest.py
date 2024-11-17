@@ -113,14 +113,15 @@ st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
 # Highlight position on gradient if a tooltip is shown
-if clicked and highlight_percentage != "N/A" and highlight_percentage is not None:
-    plt.figure(figsize=(6, 1))
+if selected_province != "All" and highlight_percentage != "N/A" and highlight_percentage is not None:
+    st.sidebar.subheader(f"Percentage for {selected_province}: {highlight_percentage}%")
+    # Display the color scale indicating the value for the selected province
+    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
+    plt.figure(figsize=(6, 0.5))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.xlabel("Percentage (0-100)")
-    plt.ylabel("Intensity")
-    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
-    plt.bar([position], [1], color='black', width=5, align='center')
+    plt.axis("off")
+    plt.bar([position], [1], color='black', width=5, align='center')  # Highlight the position on the color bar
     st.sidebar.pyplot(plt)
 
 # Initialize the district map
