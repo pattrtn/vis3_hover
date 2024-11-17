@@ -98,9 +98,11 @@ for feature in geojson_data["features"]:
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
+st.write("Debug: province_map_data", province_map_data)
 
 # Check if a tooltip is shown
 if province_map_data:
+    st.write("Debug: Checking tooltip and province_map_data")
     for feature in geojson_data["features"]:
         tooltip_text = f"{feature['properties']['NAME_1']}: {province_percentage.get(feature['properties']['NAME_1'], 'N/A')}%"
         if tooltip_text in province_map_data.get('last_tooltip', ''):
