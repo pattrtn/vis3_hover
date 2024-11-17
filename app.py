@@ -94,20 +94,21 @@ province_map_data = st_folium(province_map, width=800, height=600)
 # Handle user interaction with provinces
 if province_map_data and 'last_active_drawing' in province_map_data:
     clicked_province = province_map_data['last_active_drawing']
-    if clicked_province and 'properties' in clicked_province:
-        selected_province_name = clicked_province['properties'].get('NAME_1', 'Unknown')
+    if clicked_province:
+        selected_province_name = clicked_province.get('properties', {}).get('NAME_1', 'Unknown')
         highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
-        st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
+        st.sidebar.markdown(f"**Clicked Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
         st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
 
 # Highlight position on gradient
 if highlight_percentage != "N/A" and highlight_percentage is not None:
-    plt.figure(figsize=(6, 0.5))
-    plt.imshow(gradient, aspect="auto", cmap=cmap)
+    plt.figure(figsize=(6, 1))
+    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
     plt.axis("off")
     position = float(highlight_percentage) / 100 * 255  # Normalize percentage to 256-pixel width
-    plt.scatter([position], [0.5], color='black', s=100, zorder=5)  # Add black point to gradient
+    plt.scatter([position], [0.5], color='black', s=200, zorder=5)  # Center black point and increase size
     st.sidebar.pyplot(plt)
 
 # Initialize the district map
