@@ -64,9 +64,22 @@ st.sidebar.pyplot(fig)
 
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
+selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 
-# Add dropdown in the sidebar to choose a province
-selected_province = st.sidebar.selectbox("Select a Province", ["Select Province"] + province_list)
+# Filter GeoJSON data by selected province
+highlight_percentage = None
+if selected_province != "All":
+    # Filter only the selected province's features from the GeoJSON data
+    geojson_data["features"] = [
+        feature for feature in geojson_data["features"]
+        if feature["properties"]["NAME_1"] == selected_province
+    ]
+    geojson_data2["features"] = [
+        feature for feature in geojson_data2["features"]
+        if feature["properties"]["NAME_1"] == selected_province
+    ]
+    highlight_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
+    st.write("Highlight Percentage (Selected Province):", highlight_percentage)
 
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
@@ -93,35 +106,27 @@ for feature in geojson_data["features"]:
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
-# When a province is selected from the dropdown, show its details in the sidebar
-if selected_province != "Select Province":
-    # Get the percentage for the selected province
-    selected_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
+# Handle user interaction with provinces
+if province_map_data and 'last_active_drawing' in province_map_data:
+    st.write("Debug: last_active_drawing", province_map_data['last_active_drawing'])
+    clicked_province = province_map_data['last_active_drawing']
+    if clicked_province:
+        selected_province_name = clicked_province.get('properties', {}).get('NAME_1', 'Unknown')
+        highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
+        st.sidebar.markdown(f"**Clicked Province**: {selected_province_name}")
+        st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
+        st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
 
-    # Update the sidebar with the selected province details
-    st.sidebar.markdown(f"### Selected Province: {selected_province}")
-    st.sidebar.markdown(f"**Percentage**: {selected_percentage}%")
-
-    # Find the coordinates of the selected province for additional info (if available)
-    province_info = next((feature for feature in geojson_data["features"] if feature["properties"]["NAME_1"] == selected_province), None)
-    
-    if province_info:
-        coordinates = province_info["geometry"]["coordinates"][0][0]  # Get first coordinate point
-        location = f"Latitude: {coordinates[1]}, Longitude: {coordinates[0]}"
-        st.sidebar.markdown(f"**Location**: {location}")
-
-    # Show additional details in the main content (optional)
-    st.write(f"Details for {selected_province}:")
-    st.write(f"Percentage: {selected_percentage}%")
-
-    # Highlight position on gradient
-    if selected_percentage != "N/A" and selected_percentage is not None:
-        fig, ax = plt.subplots(figsize=(6, 0.5))
-        ax.imshow(gradient, aspect="auto", cmap=cmap)
-        ax.axis("off")
-        position = float(selected_percentage) / 100 * 255  # Normalize percentage to 256-pixel width
-        ax.scatter([position], [0.5], color='black', s=100, zorder=5)  # Add black point to gradient
-        st.sidebar.pyplot(fig)
+# Highlight position on gradient if province is selected
+if highlight_percentage != "N/A" and highlight_percentage is not None:
+    plt.figure(figsize=(6, 1))
+    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
+    plt.xlabel("Percentage (0-100)")
+    plt.ylabel("Intensity")
+    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
+    plt.bar([position], [1], color='black', width=5, align='center')
+    st.sidebar.pyplot(plt)
 
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
