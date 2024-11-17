@@ -41,13 +41,15 @@ min_percentage = 0  # Gradient starts at 0%
 max_percentage = 100  # Gradient ends at 100%
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
-# Use RdYlBu colormap as an image in the sidebar
+
+# Use RdYlBu colormap as an image in the sidebar only if no province is selected
 cmap = plt.get_cmap("RdYlBu")
 gradient = np.linspace(0, 1, 256).reshape(1, -1)
-plt.figure(figsize=(6, 0.5))
-plt.imshow(gradient, aspect="auto", cmap=cmap)
-plt.axis("off")
-st.sidebar.pyplot(plt)
+if 'selected_province' in locals() and selected_province == "All":
+    plt.figure(figsize=(6, 0.5))
+    plt.imshow(gradient, aspect="auto", cmap=cmap)
+    plt.axis("off")
+    st.sidebar.pyplot(plt)
 
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
@@ -101,14 +103,14 @@ if province_map_data and 'last_active_drawing' in province_map_data:
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
         st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
 
-# Highlight position on gradient
+# Highlight position on gradient if province is selected
 if highlight_percentage != "N/A" and highlight_percentage is not None:
-    plt.figure(figsize=(6, 1))
+    plt.figure(figsize=(6, 0.5))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
     plt.axis("off")
-    position = float(highlight_percentage) / 100 * 255  # Normalize percentage to 256-pixel width
-    plt.scatter([position], [0.5], color='black', s=200, zorder=5)  # Center black point and increase size
+    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
+    plt.bar([position], [1], color='black', width=5, align='center')  # Replace scatter with bar
     st.sidebar.pyplot(plt)
 
 # Initialize the district map
