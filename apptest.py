@@ -54,6 +54,13 @@ cmap = plt.get_cmap(colormap_option)
 # Add a title for the province scale in the sidebar
 st.sidebar.markdown("### Province Scale")
 
+# **Color gradient** for the scale (always show)
+gradient = np.linspace(0, 1, 256).reshape(1, -1)
+plt.figure(figsize=(6, 0.5))
+plt.imshow(gradient, aspect="auto", cmap=cmap)
+plt.axis("off")
+st.sidebar.pyplot(plt)
+
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
 selected_province = st.selectbox("Select a Province", ["All"] + province_list)
@@ -176,14 +183,3 @@ if district_map_data and 'last_active_drawing' in district_map_data:
         st.sidebar.markdown(f"**Clicked Province**: {clicked_province_name}")
         st.sidebar.markdown(f"**Clicked District**: {clicked_district_name}")
         st.sidebar.markdown(f"**District Percentage**: {district_percentage_value}%")
-
-# Highlight position on gradient for district if selected
-if district_percentage_value != "N/A" and district_percentage_value is not None:
-    plt.figure(figsize=(6, 1))
-    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.xlabel("Percentage (0-100)")
-    plt.ylabel("Intensity")
-    position = float(district_percentage_value) / 100 * 256  # Normalize district percentage
-    plt.bar([position], [1], color='black', width=5, align='center')
-    st.sidebar.pyplot(plt)
