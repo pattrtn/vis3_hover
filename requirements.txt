@@ -10,3 +10,4 @@ basemap
 folium
 streamlit_folium
 numpy
+shapely
