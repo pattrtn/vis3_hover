@@ -78,7 +78,9 @@ for feature in geojson_data["features"]:
     tooltip_text = f"{name}: {province_percentage.get(name, 'N/A')}%"
     percentage = province_percentage.get(name, "N/A")
     color = "grey" if percentage == "N/A" else plt.get_cmap("RdYlBu")(percentage / 100)
-    folium.GeoJson(
+
+    # Add a click listener to GeoJson
+    geojson = folium.GeoJson(
         feature,
         tooltip=tooltip_text,  # Set the tooltip to display NAME_1 and percentage
         style_function=lambda x, color=color: {
@@ -87,14 +89,19 @@ for feature in geojson_data["features"]:
             "weight": 1,
             "fillOpacity": 0.5,
         }
-    ).add_to(province_map)
+    )
+    geojson.add_child(
+        folium.Popup(f"Province: {name}<br>Percentage: {percentage}%")
+    )
+    geojson.add_to(province_map)
+
 
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 st.write("Debug: province_map_data", province_map_data)  # Debug province_map_data
 
-# Handle user interaction with provinces
+# Handle user interaction with provincesa
 if province_map_data and 'last_active_drawing' in province_map_data:
     st.write("Debug: 'last_active_drawing' in province_map_data")  # Debug 'last_active_drawing'
     clicked_province = province_map_data['last_active_drawing']
