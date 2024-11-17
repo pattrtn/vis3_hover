@@ -96,7 +96,7 @@ for feature in geojson_data["features"]:
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
-st.write("Debug: province_map_data", province_map_data)
+# st.write("Debug: province_map_data", province_map_data)
 
 # Highlight position on gradient if a tooltip is shown
 if highlight_percentage != "N/A" and highlight_percentage is not None:
