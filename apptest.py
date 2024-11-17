@@ -99,17 +99,19 @@ elif region_type == "District":
 for feature in geojson_data["features"]:
     name = feature["properties"]["NAME_1"]
     percentage = province_percentage.get(name, "N/A")
+    
     # Assign color based on the percentage
     if percentage == "N/A":
         color = "#D3D3D3"  # light grey for N/A
     else:
         color = cmap(percentage / 100)
-
+    
+    # Create GeoJson for the province with valid color
     geojson = folium.GeoJson(
         feature,
         tooltip=f"{name}: {percentage}%",
         style_function=lambda x, color=color: {
-            "fillColor": mcolors.rgb2hex(color[:3]),
+            "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else color,  # Use color if valid tuple
             "color": "black",
             "weight": 1,
             "fillOpacity": 0.5,
@@ -122,17 +124,19 @@ for feature in geojson_data2["features"]:
     province_name = feature["properties"]["NAME_1"]
     district_name = feature["properties"]["NAME_2"]
     percentage = district_percentage.get((province_name, district_name), "N/A")
+    
     # Assign color based on the percentage
     if percentage == "N/A":
         color = "#D3D3D3"  # light grey for N/A
     else:
         color = cmap(percentage / 100)
-
+    
+    # Create GeoJson for the district with valid color
     folium.GeoJson(
         feature,
         tooltip=f"{district_name}: {percentage}%",
         style_function=lambda x, color=color: {
-            "fillColor": mcolors.rgb2hex(color[:3]),
+            "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else color,  # Use color if valid tuple
             "color": "black",
             "weight": 1,
             "fillOpacity": 0.5,
