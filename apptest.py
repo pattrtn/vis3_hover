@@ -35,7 +35,8 @@ district_percentage = district_data.set_index(['Province', 'district'])['percent
 st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
 st.markdown("[Predict Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app/)!")
 st.markdown(
-    """The model is a simple CRF that takes a string and tags each token as LOC (tambon, amphoe, or province), POST (postal code), ADDR (other address element), or O (the rest)."""
+    """This heatmap visualizes the accuracy percentage of data across Thailand’s provinces and districts. 
+    Each region is color-coded based on the accuracy of the information associated with it, providing a clear and intuitive way to assess the quality of data at both the provincial and district levels."""
 )
 
 # Sidebar for data range visualization
