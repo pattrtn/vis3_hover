@@ -167,24 +167,3 @@ for feature in geojson_data2["features"]:
 st.subheader("Districts Heatmap")
 st_folium(district_map, width=800, height=600)
 
-# Handle user interaction with districts
-if district_map_data and 'last_active_drawing' in district_map_data:
-    clicked_district = district_map_data['last_active_drawing']
-    if clicked_district:
-        clicked_province_name = clicked_district.get('properties', {}).get('NAME_1', 'Unknown')
-        clicked_district_name = clicked_district.get('properties', {}).get('NAME_2', 'Unknown')
-        district_percentage_value = district_percentage.get((clicked_province_name, clicked_district_name), 'N/A')
-        st.sidebar.markdown(f"**Clicked Province**: {clicked_province_name}")
-        st.sidebar.markdown(f"**Clicked District**: {clicked_district_name}")
-        st.sidebar.markdown(f"**District Percentage**: {district_percentage_value}%")
-
-# Highlight position on gradient for district if selected
-if district_percentage_value != "N/A" and district_percentage_value is not None:
-    plt.figure(figsize=(6, 1))
-    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.xlabel("Percentage (0-100)")
-    plt.ylabel("Intensity")
-    position = float(district_percentage_value) / 100 * 256  # Normalize district percentage
-    plt.bar([position], [1], color='black', width=5, align='center')
-    st.sidebar.pyplot(plt)
