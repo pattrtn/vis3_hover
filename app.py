@@ -75,7 +75,7 @@ def get_color_province(percentage):
     normalized_percentage = np.clip(percentage / 100, 0, 1)
 
     # Use matplotlib's 'Reds' colormap (from white to red)
-    cmap = plt.get_cmap("Reds")
+    cmap = plt.get_cmap("RdYlBu")
     rgba_color = cmap(normalized_percentage)
     
     # Convert the RGBA color to hex
