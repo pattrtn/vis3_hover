@@ -110,8 +110,12 @@ if highlight_percentage != "N/A" and highlight_percentage is not None:
     plt.imshow(gradient_array, aspect="auto", cmap=cmap)
     plt.axis("off")
     position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
-    plt.bar([position], [1], color='black', width=5, align='center')  # Replace scatter with bar
+    plt.bar(
+        [position], [1], color='black', width=5, align='center',
+        height=0.5  # Ensure the bar height fits within the gradient visualization
+    )  
     st.sidebar.pyplot(plt)
+
 
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
