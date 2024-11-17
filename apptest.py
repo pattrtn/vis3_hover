@@ -31,11 +31,6 @@ district_data['district'] = district_data['district'].str.replace(' ', '')
 province_percentage = province_data.set_index('Province')['percentage_true'].to_dict()
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
-# Initialize session state for tracking the selected province
-if 'selected_province' not in st.session_state:
-    st.session_state.selected_province = None
-    st.session_state.selected_percentage = None
-
 # Create a Streamlit app
 st.title("Thailand Provinces and Districts - Heatmap by Percentage")
 
@@ -46,14 +41,6 @@ min_percentage = 0  # Gradient starts at 0%
 max_percentage = 100  # Gradient ends at 100%
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
-
-# Display the current selected province and percentage in the sidebar
-if st.session_state.selected_province and st.session_state.selected_percentage is not None:
-    st.sidebar.markdown(f"**Current Selected**: {st.session_state.selected_province}")
-    st.sidebar.markdown(f"**Percentage**: {st.session_state.selected_percentage}%")
-else:
-    st.sidebar.markdown("**Current Selected**: None")
-    st.sidebar.markdown("**Percentage**: N/A")
 
 # Add a selectbox for the user to choose a color map
 colormap_option = st.sidebar.selectbox(
@@ -75,6 +62,12 @@ ax.axis("off")  # Hide the axes
 # Display the gradient color scale in the sidebar
 st.sidebar.pyplot(fig)
 
+# Dropdown for selecting a province
+province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
+
+# Add dropdown in the sidebar to choose a province
+selected_province = st.sidebar.selectbox("Select a Province", ["Select Province"] + province_list)
+
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
@@ -93,52 +86,40 @@ for feature in geojson_data["features"]:
             "color": "black",
             "weight": 1,
             "fillOpacity": 0.5,
-        },
-        # Add a click event for the province feature
-        popup=folium.Popup(f"{name}: {percentage}%")
+        }
     ).add_to(province_map)
 
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
-# Handle user interaction with provinces
-if province_map_data and 'last_active_drawing' in province_map_data:
-    clicked_province = province_map_data['last_active_drawing']
-    if clicked_province and 'properties' in clicked_province:
-        selected_province_name = clicked_province['properties'].get('NAME_1', 'Unknown')
-        
-        # Update the selected province and its percentage in session state
-        selected_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
-        st.session_state.selected_province = selected_province_name
-        st.session_state.selected_percentage = selected_percentage
+# When a province is selected from the dropdown, show its details in the sidebar
+if selected_province != "Select Province":
+    # Get the percentage for the selected province
+    selected_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
 
-# Sidebar will now display the information for the selected province
-st.sidebar.markdown("### Highlight Percentage")
+    # Update the sidebar with the selected province details
+    st.sidebar.markdown(f"### Selected Province: {selected_province}")
+    st.sidebar.markdown(f"**Percentage**: {selected_percentage}%")
 
-if st.session_state.selected_province:
-    selected_province_name = st.session_state.selected_province
-    highlight_percentage = st.session_state.selected_percentage
+    # Find the coordinates of the selected province for additional info (if available)
+    province_info = next((feature for feature in geojson_data["features"] if feature["properties"]["NAME_1"] == selected_province), None)
     
-    # Display dynamic information in the sidebar in line format
-    st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
-    st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
-    
-    # Additional details about the province (using location from coordinates)
-    province_info = next((feature for feature in geojson_data["features"] if feature["properties"]["NAME_1"] == selected_province_name), None)
     if province_info:
         coordinates = province_info["geometry"]["coordinates"][0][0]  # Get first coordinate point
         location = f"Latitude: {coordinates[1]}, Longitude: {coordinates[0]}"
         st.sidebar.markdown(f"**Location**: {location}")
-    
-    st.write(f"Highlight Percentage (Clicked Province): {highlight_percentage}%")
-    
+
+    # Show additional details in the main content (optional)
+    st.write(f"Details for {selected_province}:")
+    st.write(f"Percentage: {selected_percentage}%")
+
     # Highlight position on gradient
-    if highlight_percentage != "N/A" and highlight_percentage is not None:
+    if selected_percentage != "N/A" and selected_percentage is not None:
         fig, ax = plt.subplots(figsize=(6, 0.5))
         ax.imshow(gradient, aspect="auto", cmap=cmap)
         ax.axis("off")
-        position = float(highlight_percentage) / 100 * 255  # Normalize percentage to 256-pixel width
+        position = float(selected_percentage) / 100 * 255  # Normalize percentage to 256-pixel width
         ax.scatter([position], [0.5], color='black', s=100, zorder=5)  # Add black point to gradient
         st.sidebar.pyplot(fig)
 
