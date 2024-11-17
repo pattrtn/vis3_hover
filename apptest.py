@@ -121,7 +121,7 @@ def create_district_map():
 district_map = create_district_map()
 
 # Display the district map in Streamlit (this will show the selected district or all districts)
-st.subheader("Districts Heatmap")
+st.subheader("Heatmap")
 district_map_data = st_folium(district_map, width=800, height=600)
 
 # Add province heatmap when a province is selected
