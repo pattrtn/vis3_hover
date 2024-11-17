@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
-# Load the GeoJSON file
+# Load the GeoJSON files
 geojson_file_path = "gadm41_THA_1.json"
 with open(geojson_file_path, "r", encoding="utf-8") as f:
     geojson_data = json.load(f)
@@ -60,6 +60,7 @@ selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 
 # Filter GeoJSON data by selected province
 highlight_percentage = None
+district_list = []
 if selected_province != "All":
     # Filter only the selected province's features from the GeoJSON data
     geojson_data["features"] = [
@@ -70,8 +71,17 @@ if selected_province != "All":
         feature for feature in geojson_data2["features"]
         if feature["properties"]["NAME_1"] == selected_province
     ]
+    
+    # Collect list of districts for the selected province
+    district_list = sorted(set([feature["properties"]["NAME_2"] for feature in geojson_data2["features"] if feature["properties"]["NAME_1"] == selected_province]))
+
     highlight_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
     st.write("Highlight Percentage (Selected Province):", highlight_percentage)
+
+# Dropdown for selecting a district, only show when a province is selected
+district_selected = None
+if district_list:
+    district_selected = st.selectbox("Select a District", ["None"] + district_list)
 
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
@@ -100,25 +110,12 @@ province_map_data = st_folium(province_map, width=800, height=600)
 
 # Handle user interaction with provinces
 if province_map_data and 'last_active_drawing' in province_map_data:
-    st.write("Debug: last_active_drawing", province_map_data['last_active_drawing'])
     clicked_province = province_map_data['last_active_drawing']
     if clicked_province:
         selected_province_name = clicked_province.get('properties', {}).get('NAME_1', 'Unknown')
         highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
         st.sidebar.markdown(f"**Clicked Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
-        st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
-
-# Highlight position on gradient if province is selected
-if highlight_percentage != "N/A" and highlight_percentage is not None:
-    plt.figure(figsize=(6, 1))
-    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.xlabel("Percentage (0-100)")
-    plt.ylabel("Intensity")
-    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
-    plt.bar([position], [1], color='black', width=5, align='center')
-    st.sidebar.pyplot(plt)
 
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
@@ -147,8 +144,8 @@ st.subheader("Districts Heatmap")
 district_map_data = st_folium(district_map, width=800, height=600)
 
 # Handle user interaction with districts
+district_percentage_value = "N/A"
 if district_map_data and 'last_active_drawing' in district_map_data:
-    st.write("Debug: last_active_drawing", district_map_data['last_active_drawing'])
     clicked_district = district_map_data['last_active_drawing']
     if clicked_district:
         clicked_province_name = clicked_district.get('properties', {}).get('NAME_1', 'Unknown')
@@ -157,7 +154,6 @@ if district_map_data and 'last_active_drawing' in district_map_data:
         st.sidebar.markdown(f"**Clicked Province**: {clicked_province_name}")
         st.sidebar.markdown(f"**Clicked District**: {clicked_district_name}")
         st.sidebar.markdown(f"**District Percentage**: {district_percentage_value}%")
-        st.write("Highlight Percentage (Clicked District):", district_percentage_value)
 
 # Highlight position on gradient if district is selected
 if district_percentage_value != "N/A" and district_percentage_value is not None:
