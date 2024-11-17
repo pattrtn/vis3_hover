@@ -50,7 +50,14 @@ selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 # Filter GeoJSON data by selected province
 highlight_percentage = None
 clicked = False
-if selected_province != "All":
+if selected_province == "All":
+    # Show gradient map without bar if "All" is selected
+    plt.figure(figsize=(6, 0.5))
+    gradient = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient, aspect="auto", cmap=plt.get_cmap("RdYlBu"))
+    plt.axis("off")
+    st.sidebar.pyplot(plt)
+else:
     geojson_data["features"] = [
         feature for feature in geojson_data["features"]
         if feature["properties"]["NAME_1"] == selected_province
@@ -60,13 +67,6 @@ if selected_province != "All":
         if feature["properties"]["NAME_1"] == selected_province
     ]
     highlight_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
-else:
-    # Show gradient map without bar if "All" is selected
-    plt.figure(figsize=(6, 0.5))
-    gradient = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient, aspect="auto", cmap=plt.get_cmap("RdYlBu"))
-    plt.axis("off")
-    st.sidebar.pyplot(plt)
 
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
