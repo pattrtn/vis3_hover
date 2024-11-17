@@ -77,8 +77,21 @@ province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 # Add GeoJSON polygons with tooltips for provinces
 for feature in geojson_data["features"]:
     name = feature["properties"]["NAME_1"]
+    
+    # Retrieve the percentage and handle non-numeric values
     percentage = province_percentage.get(name, "N/A")
-    color = "grey" if percentage == "N/A" else cmap(percentage / 100)  # Apply colormap
+    
+    # Check if the percentage is numeric (and handle "N/A")
+    try:
+        percentage = float(percentage)
+    except ValueError:
+        percentage = None  # If the value is "N/A" or not a valid number, set to None
+
+    # Assign color if valid percentage, else grey
+    if percentage is None:
+        color = "grey"
+    else:
+        color = cmap(percentage / 100)  # Apply colormap based on percentage
 
     folium.GeoJson(
         feature,
@@ -125,8 +138,22 @@ if selected_district != "All":
 for feature in geojson_data2["features"]:
     province_name = feature["properties"]["NAME_1"]
     district_name = feature["properties"]["NAME_2"]
+    
+    # Retrieve the percentage and handle non-numeric values
     percentage = district_percentage.get((province_name, district_name), "N/A")
-    color = "grey" if percentage == "N/A" else cmap(percentage / 100)  # Apply colormap
+    
+    # Check if the percentage is numeric (and handle "N/A")
+    try:
+        percentage = float(percentage)
+    except ValueError:
+        percentage = None  # If the value is "N/A" or not a valid number, set to None
+
+    # Assign color if valid percentage, else grey
+    if percentage is None:
+        color = "grey"
+    else:
+        color = cmap(percentage / 100)  # Apply colormap based on percentage
+
     folium.GeoJson(
         feature,
         tooltip=f"{district_name}: {percentage}%",
