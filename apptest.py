@@ -34,6 +34,7 @@ district_percentage = district_data.set_index(['Province', 'district'])['percent
 # Initialize session state for tracking the selected province
 if 'selected_province' not in st.session_state:
     st.session_state.selected_province = None
+    st.session_state.selected_percentage = None
 
 # Create a Streamlit app
 st.title("Thailand Provinces and Districts - Heatmap by Percentage")
@@ -45,6 +46,14 @@ min_percentage = 0  # Gradient starts at 0%
 max_percentage = 100  # Gradient ends at 100%
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
+
+# Display the current selected province and percentage in the sidebar
+if st.session_state.selected_province and st.session_state.selected_percentage is not None:
+    st.sidebar.markdown(f"**Current Selected**: {st.session_state.selected_province}")
+    st.sidebar.markdown(f"**Percentage**: {st.session_state.selected_percentage}%")
+else:
+    st.sidebar.markdown("**Current Selected**: None")
+    st.sidebar.markdown("**Percentage**: N/A")
 
 # Add a selectbox for the user to choose a color map
 colormap_option = st.sidebar.selectbox(
@@ -99,15 +108,17 @@ if province_map_data and 'last_active_drawing' in province_map_data:
     if clicked_province and 'properties' in clicked_province:
         selected_province_name = clicked_province['properties'].get('NAME_1', 'Unknown')
         
-        # Update the selected province in the session state
+        # Update the selected province and its percentage in session state
+        selected_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
         st.session_state.selected_province = selected_province_name
+        st.session_state.selected_percentage = selected_percentage
 
 # Sidebar will now display the information for the selected province
 st.sidebar.markdown("### Highlight Percentage")
 
 if st.session_state.selected_province:
     selected_province_name = st.session_state.selected_province
-    highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
+    highlight_percentage = st.session_state.selected_percentage
     
     # Display dynamic information in the sidebar in line format
     st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
