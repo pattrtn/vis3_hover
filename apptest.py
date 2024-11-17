@@ -176,4 +176,9 @@ if selected_province != "All":
     st.sidebar.markdown("### Province Scale")
     plt.figure(figsize=(6, 1))
     gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap
+    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
+    plt.xlabel("Percentage (0-100)")
+    plt.ylabel("Intensity")
+    position = float(highlight_percentage) / 100 * 256  # Normalize province percentage
+    plt.bar([position], [1], color='black', width=5, align='center')
+    st.sidebar.pyplot(plt)
