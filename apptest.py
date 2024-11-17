@@ -33,7 +33,12 @@ province_percentage = province_data.set_index('Province')['percentage_true'].to_
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
 # Create a Streamlit app
-st.title("Thailand Provinces and Districts - Heatmap by Percentage")
+st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
+st.markdown("[Prediction Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app/) !")
+st.markdown(
+    """This heatmap visualizes the accuracy percentage of data across Thailand’s provinces and districts. 
+    Each region is color-coded based on the accuracy of the information associated with it, providing a clear and intuitive way to assess the quality of data at both the provincial and district levels.."""
+)
 
 # Sidebar for data range visualization
 st.sidebar.header("Data Range")
@@ -43,7 +48,6 @@ max_percentage = 100  # Gradient ends at 100%
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
 
-# Add a selectbox for the user to choose a color map
 colormap_option = st.sidebar.selectbox(
     "Select Colormap",
     ["RdYlBu", "YlGnBu", "Spectral", "viridis", "plasma", "cividis"]
@@ -86,6 +90,16 @@ for feature in geojson_data["features"]:
     color = "grey" if percentage == "N/A" else plt.get_cmap("RdYlBu")(percentage / 100)
 
     # Add a click listener to GeoJson
+
+    # Example visualization in the sidebar
+    plt.figure(figsize=(6, 1))
+    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
+    plt.xlabel("Percentage (0-100)")
+    plt.ylabel("Intensity")
+    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
+    plt.bar([position], [1], color='black', width=5, align='center')
+    st.sidebar.pyplot(plt)
     geojson = folium.GeoJson(
         feature,
         tooltip=tooltip_text,  # Set the tooltip to display NAME_1 and percentage
@@ -105,31 +119,6 @@ for feature in geojson_data["features"]:
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
-
-# Handle user interaction with provinces
-if province_map_data:
-    clicked_coordinates = province_map_data.get('last_clicked', None)
-    st.write("Debug: clicked_coordinates", clicked_coordinates)  # Debug clicked coordinates
-    if clicked_coordinates:
-        lat, lng = clicked_coordinates['lat'], clicked_coordinates['lng']
-        point = Point(lng, lat)  # Convert lat, lng to a shapely Point
-
-        clicked_province_name = None
-        for feature in geojson_data["features"]:
-            polygon = shape(feature["geometry"])  # Create a shapely Polygon
-            st.write("Debug: polygon", polygon)  # Debug polygon
-            if polygon.contains(point):  # Check if the point is inside the polygon
-                clicked_province_name = feature["properties"]["NAME_1"]
-                break
-
-        if clicked_province_name:
-            highlight_percentage = province_percentage.get(clicked_province_name.replace(' ', ''), 'N/A')
-            st.sidebar.markdown(f"**Clicked Province**: {clicked_province_name}")
-            st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
-        else:
-            st.sidebar.markdown("**Clicked Location is Outside of Provinces**")
-    else:
-        st.sidebar.markdown("**No Location Clicked**")
 
 # Highlight position on gradient if province is selected
 if highlight_percentage != "N/A" and highlight_percentage is not None:
@@ -166,4 +155,3 @@ for feature in geojson_data2["features"]:
 # Display the district map in Streamlit
 st.subheader("Districts Heatmap")
 st_folium(district_map, width=800, height=600)
-
