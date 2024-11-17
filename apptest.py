@@ -103,6 +103,8 @@ if province_map_data and 'last_active_drawing' in province_map_data:
         st.session_state.selected_province = selected_province_name
 
 # Sidebar will now display the information for the selected province
+st.sidebar.markdown("### Highlight Percentage")
+
 if st.session_state.selected_province:
     selected_province_name = st.session_state.selected_province
     highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
