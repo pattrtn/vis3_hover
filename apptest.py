@@ -8,17 +8,17 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
 # Load the GeoJSON files
-geojson_file_path = "gadm41_THA_1.json"
+geojson_file_path = "gadm41_THA_1.json"  # Adjust path if needed
 with open(geojson_file_path, "r", encoding="utf-8") as f:
     geojson_data = json.load(f)
 
-geojson_file_path2 = "gadm41_THA_2.json"
+geojson_file_path2 = "gadm41_THA_2.json"  # Adjust path if needed
 with open(geojson_file_path2, "r", encoding="utf-8") as f2:
     geojson_data2 = json.load(f2)
 
 # Load the CSV files for province and district percentages
-province_csv_path = "./Province_Check_Percentage.csv"
-district_csv_path = "./Province_and_District_Check_Percentage.csv"
+province_csv_path = "./Province_Check_Percentage.csv"  # Adjust path if needed
+district_csv_path = "./Province_and_District_Check_Percentage.csv"  # Adjust path if needed
 province_data = pd.read_csv(province_csv_path)
 district_data = pd.read_csv(district_csv_path)
 
