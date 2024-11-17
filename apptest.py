@@ -51,6 +51,15 @@ colormap_option = st.sidebar.selectbox(
 # Convert the selected colormap to a matplotlib colormap object
 cmap = plt.get_cmap(colormap_option)
 
+# Display the color scale (gradient) in the sidebar
+gradient = np.linspace(0, 1, 256).reshape(1, -1)
+plt.figure(figsize=(6, 0.5))
+plt.imshow(gradient, aspect="auto", cmap=cmap)
+plt.axis("off")
+plt.xlabel("Percentage (0-100%)")
+plt.ylabel("Intensity")
+st.sidebar.pyplot(plt)
+
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
 selected_province = st.selectbox("Select a Province", ["All"] + province_list)
@@ -102,7 +111,6 @@ for feature in geojson_data["features"]:
 # Display the province map in Streamlit
 st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
-st.write("Debug: province_map_data", province_map_data)
 
 # Highlight position on gradient if a tooltip is shown
 if clicked and highlight_percentage != "N/A" and highlight_percentage is not None:
