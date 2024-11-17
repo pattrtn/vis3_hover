@@ -98,6 +98,15 @@ if province_map_data and 'last_active_drawing' in province_map_data:
         st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {selected_province_percentage}%")
 
+        # Highlight position on gradient
+        if selected_province_percentage != "N/A":
+            plt.figure(figsize=(6, 0.5))
+            plt.imshow(gradient, aspect="auto", cmap=cmap)
+            plt.axis("off")
+            position = float(selected_province_percentage) / 100 * 255
+            plt.scatter([position], [0], color='black', s=50, zorder=5)
+            st.sidebar.pyplot(plt)
+
 # Initialize the district map
 district_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
 
