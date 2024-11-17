@@ -99,7 +99,11 @@ elif region_type == "District":
 for feature in geojson_data["features"]:
     name = feature["properties"]["NAME_1"]
     percentage = province_percentage.get(name, "N/A")
-    color = "grey" if percentage == "N/A" else cmap(percentage / 100)
+    # Assign color based on the percentage
+    if percentage == "N/A":
+        color = "#D3D3D3"  # light grey for N/A
+    else:
+        color = cmap(percentage / 100)
 
     geojson = folium.GeoJson(
         feature,
@@ -118,7 +122,11 @@ for feature in geojson_data2["features"]:
     province_name = feature["properties"]["NAME_1"]
     district_name = feature["properties"]["NAME_2"]
     percentage = district_percentage.get((province_name, district_name), "N/A")
-    color = "grey" if percentage == "N/A" else cmap(percentage / 100)
+    # Assign color based on the percentage
+    if percentage == "N/A":
+        color = "#D3D3D3"  # light grey for N/A
+    else:
+        color = cmap(percentage / 100)
 
     folium.GeoJson(
         feature,
