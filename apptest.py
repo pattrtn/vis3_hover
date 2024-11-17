@@ -43,8 +43,14 @@ max_percentage = 100  # Gradient ends at 100%
 st.sidebar.markdown(f"**Low**: {min_percentage}%")
 st.sidebar.markdown(f"**High**: {max_percentage}%")
 
+# Add a selectbox for the user to choose a color map
+colormap_option = st.sidebar.selectbox(
+    "Select Colormap",
+    ["RdYlBu", "YlGnBu", "Spectral", "viridis", "plasma", "cividis"]
+)
+
 # Use RdYlBu colormap as an image in the sidebar only if no province is selected
-cmap = plt.get_cmap("RdYlBu")
+cmap = plt.get_cmap(colormap_option)
 gradient = np.linspace(0, 1, 256).reshape(1, -1)
 if 'selected_province' in locals() and selected_province == "All":
     plt.figure(figsize=(6, 0.5))
