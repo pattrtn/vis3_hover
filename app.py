@@ -54,7 +54,7 @@ if selected_province == "All":
     # Show gradient map without bar if "All" is selected
     plt.figure(figsize=(6, 0.5))
     gradient = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient, aspect="auto", plt.get_cmap("RdYlBu")=plt.get_cmap("RdYlBu"))
+    plt.imshow(gradient, aspect="auto", cmap=cmap)
     plt.xlabel("Percentage (0-100)")
     plt.ylabel("Intensity")
     st.sidebar.pyplot(plt)
