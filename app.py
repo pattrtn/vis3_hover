@@ -54,6 +54,7 @@ province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_d
 selected_province = st.selectbox("Select a Province", ["All"] + province_list)
 
 # Filter GeoJSON data by selected province
+highlight_percentage = None
 if selected_province != "All":
     geojson_data["features"] = [
         feature for feature in geojson_data["features"]
@@ -63,7 +64,8 @@ if selected_province != "All":
         feature for feature in geojson_data2["features"]
         if feature["properties"]["NAME_1"] == selected_province
     ]
-    district_data = district_data[district_data['Province'] == selected_province.replace(' ', '')]
+    highlight_percentage = province_percentage.get(selected_province.replace(' ', ''), 'N/A')
+    st.write("Highlight Percentage (Selected Province):", highlight_percentage)
 
 # Initialize the map centered at Thailand
 province_map = folium.Map(location=[13.736717, 100.523186], zoom_start=6)
@@ -90,14 +92,14 @@ st.subheader("Provinces Heatmap")
 province_map_data = st_folium(province_map, width=800, height=600)
 
 # Handle user interaction with provinces
-highlight_percentage = None
 if province_map_data and 'last_active_drawing' in province_map_data:
     clicked_province = province_map_data['last_active_drawing']
     if clicked_province and 'properties' in clicked_province:
         selected_province_name = clicked_province['properties'].get('NAME_1', 'Unknown')
-        highlight_percentage = province_percentage.get(selected_province_name, 'N/A')
+        highlight_percentage = province_percentage.get(selected_province_name.replace(' ', ''), 'N/A')
         st.sidebar.markdown(f"**Selected Province**: {selected_province_name}")
         st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
+        st.write("Highlight Percentage (Clicked Province):", highlight_percentage)
 
 # Highlight position on gradient
 if highlight_percentage != "N/A" and highlight_percentage is not None:
