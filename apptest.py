@@ -51,15 +51,6 @@ colormap_option = st.sidebar.selectbox(
 # Convert the selected colormap to a matplotlib colormap object
 cmap = plt.get_cmap(colormap_option)
 
-# Display the color scale (gradient) in the sidebar
-gradient = np.linspace(0, 1, 256).reshape(1, -1)
-plt.figure(figsize=(6, 0.5))
-plt.imshow(gradient, aspect="auto", cmap=cmap)
-plt.axis("off")
-plt.xlabel("Percentage (0-100%)")
-plt.ylabel("Intensity")
-st.sidebar.pyplot(plt)
-
 # Dropdown for selecting a province
 province_list = sorted([feature["properties"]["NAME_1"] for feature in geojson_data["features"]])
 selected_province = st.selectbox("Select a Province", ["All"] + province_list)
