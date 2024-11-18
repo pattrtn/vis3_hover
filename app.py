@@ -87,32 +87,37 @@ def create_district_map():
         province_name = feature["properties"]["NAME_1"]
         district_name = feature["properties"]["NAME_2"]
 
-        # If a province is selected, show all districts within that province (or the selected district)
-        if selected_province == "All" or province_name == selected_province:
-            # Show all districts or only the selected district
+        # If no province is selected, show all districts across Thailand
+        if selected_province == "All":
+            # Show all districts
             if selected_district != "All" and district_name != selected_district:
                 continue
-            
-            # Get the percentage for this district
-            percentage = district_percentage.get((province_name, district_name), "N/A")
-            tooltip_text = f"{district_name}: {percentage}%"
-            
-            # Determine the color based on the colormap
-            if percentage == "N/A":
-                color = "grey"
-            else:
-                color = cmap(percentage / 100)  # Normalize the percentage to [0, 1] range
+        
+        # If a province is selected, show all districts within that province (or the selected district)
+        elif province_name == selected_province:
+            if selected_district != "All" and district_name != selected_district:
+                continue
+        
+        # Get the percentage for this district
+        percentage = district_percentage.get((province_name, district_name), "N/A")
+        tooltip_text = f"{district_name}: {percentage}%"
+        
+        # Determine the color based on the colormap
+        if percentage == "N/A":
+            color = "grey"
+        else:
+            color = cmap(percentage / 100)  # Normalize the percentage to [0, 1] range
 
-            folium.GeoJson(
-                feature,
-                tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
-                style_function=lambda x, color=color: {
-                    "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else "grey",
-                    "color": "black",
-                    "weight": 1,
-                    "fillOpacity": 0.5,
-                }
-            ).add_to(district_map)
+        folium.GeoJson(
+            feature,
+            tooltip=tooltip_text,  # Set the tooltip to display district name and percentage
+            style_function=lambda x, color=color: {
+                "fillColor": mcolors.rgb2hex(color[:3]) if isinstance(color, tuple) else "grey",
+                "color": "black",
+                "weight": 1,
+                "fillOpacity": 0.5,
+            }
+        ).add_to(district_map)
     
     return district_map
 
@@ -149,7 +154,13 @@ def create_province_map():
     return province_map
 
 # Display separate maps based on selection
-if selected_province != "All":
+if selected_province == "All" and selected_district == "All":
+    # Show all districts when neither province nor district is selected
+    st.subheader("All Districts Heatmap")
+    district_map = create_district_map()
+    st_folium(district_map, width=800, height=600)
+
+elif selected_province != "All":
     # Display the province heatmap when a province is selected
     st.subheader(f"Province Heatmap for {selected_province}")
     province_map = create_province_map()
@@ -168,20 +179,15 @@ if selected_province != "All":
     st.sidebar.subheader("Province Color Scale")  # Title for Province color scale
     st.sidebar.pyplot(plt)
 
-elif selected_province == "All":
-    # Display all provinces heatmap when "All" is selected for province
-    st.subheader("All Provinces Heatmap")
-    province_map = create_province_map()
-    st_folium(province_map, width=800, height=600)
+elif selected_province != "All" and selected_district == "All":
+    # Show all districts within the selected province when no district is selected
+    st.subheader(f"All Districts Heatmap for {selected_province}")
+    district_map = create_district_map()
+    st_folium(district_map, width=800, height=600)
 
-if selected_district != "All":
-    # Display the district heatmap when a district is selected
+elif selected_district != "All":
+    # Show the selected district heatmap
     st.subheader(f"District Heatmap for {selected_district} in {selected_province}")
     district_map = create_district_map()
     st_folium(district_map, width=800, height=600)
 
-elif selected_province != "All" and selected_district == "All":
-    # Display all districts of the selected province when no district is selected
-    st.subheader(f"All Districts Heatmap for {selected_province}")
-    district_map = create_district_map()
-    st_folium(district_map, width=800, height=600)
