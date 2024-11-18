@@ -153,41 +153,25 @@ def create_province_map():
     
     return province_map
 
-# Display separate maps based on selection
+# Display maps based on selection
 if selected_province == "All" and selected_district == "All":
-    # Show all districts when neither province nor district is selected
+    # Show both all provinces and all districts when nothing is selected
+    st.subheader("All Provinces Heatmap")
+    province_map = create_province_map()
+    st_folium(province_map, width=800, height=600)
+
     st.subheader("All Districts Heatmap")
     district_map = create_district_map()
     st_folium(district_map, width=800, height=600)
 
-elif selected_province != "All":
-    # Display the province heatmap when a province is selected
-    st.subheader(f"Province Heatmap for {selected_province}")
-    province_map = create_province_map()
-    st_folium(province_map, width=800, height=600)
-    
-    # Show the percentage for the selected province in the sidebar
-    st.sidebar.subheader(f"Percentage for {selected_province}: {highlight_percentage}%")
-
-    # Color scale for province selection
-    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
-    plt.figure(figsize=(6, 0.5))
-    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
-    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
-    plt.axis("off")
-    plt.bar([position], [1], color='black', width=5, align='center')  # Highlight the position on the color bar
-    st.sidebar.subheader("Province Color Scale")  # Title for Province color scale
-    st.sidebar.pyplot(plt)
-
 elif selected_province != "All" and selected_district == "All":
-    # Show all districts within the selected province when no district is selected
+    # Show all districts in the selected province when no district is selected
     st.subheader(f"All Districts Heatmap for {selected_province}")
     district_map = create_district_map()
     st_folium(district_map, width=800, height=600)
 
-elif selected_district != "All":
-    # Show the selected district heatmap
+elif selected_province != "All" and selected_district != "All":
+    # Show the selected district heatmap when both are selected
     st.subheader(f"District Heatmap for {selected_district} in {selected_province}")
     district_map = create_district_map()
     st_folium(district_map, width=800, height=600)
-
