@@ -170,8 +170,38 @@ elif selected_province != "All" and selected_district == "All":
     district_map = create_district_map()
     st_folium(district_map, width=800, height=600)
 
+    # Sidebar Details for selected province
+    st.sidebar.subheader(f"Province: {selected_province}")
+    st.sidebar.markdown(f"**Percentage**: {highlight_percentage}%")
+
+    # Color scale for province selection
+    position = float(highlight_percentage) / 100 * 256  # Normalize percentage to 256-pixel width
+    plt.figure(figsize=(6, 0.5))
+    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
+    plt.axis("off")
+    plt.bar([position], [1], color='black', width=5, align='center')  # Highlight the position on the color bar
+    st.sidebar.subheader("Province Color Scale")
+    st.sidebar.pyplot(plt)
+
 elif selected_province != "All" and selected_district != "All":
-    # Show the selected district heatmap when both are selected
+    # Show the selected district in the selected province
     st.subheader(f"District Heatmap for {selected_district} in {selected_province}")
     district_map = create_district_map()
     st_folium(district_map, width=800, height=600)
+
+    # Sidebar Details for selected district
+    district_percentage_value = district_percentage.get((selected_province, selected_district), "N/A")
+    st.sidebar.subheader(f"District: {selected_district}")
+    st.sidebar.markdown(f"**Percentage**: {district_percentage_value}%")
+    
+    # Color scale for district selection
+    position = float(district_percentage_value) / 100 * 256  # Normalize percentage to 256-pixel width
+    plt.figure(figsize=(6, 0.5))
+    gradient_array = np.linspace(0, 1, 256).reshape(1, -1)
+    plt.imshow(gradient_array, aspect="auto", cmap=cmap)
+    plt.axis("off")
+    plt.bar([position], [1], color='black', width=5, align='center')  # Highlight the position on the color bar
+    st.sidebar.subheader("District Color Scale")
+    st.sidebar.pyplot(plt)
+
