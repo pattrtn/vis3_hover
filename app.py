@@ -32,7 +32,7 @@ province_percentage = province_data.set_index('Province')['percentage_true'].to_
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
 # Streamlit App
-st.title("Thailand Provinces and Districts - Heatmap by ”NER“ Accuracy Percentage")
+st.title("Thailand Provinces and Districts - Heatmap by “NER” Accuracy Percentage")
 st.markdown("[Predict Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app/)!")
 
 st.markdown(
