@@ -32,11 +32,11 @@ province_percentage = province_data.set_index('Province')['percentage_true'].to_
 district_percentage = district_data.set_index(['Province', 'district'])['percentage_true'].to_dict()
 
 # Streamlit App
-st.title("Thailand Provinces and Districts - Heatmap by Accuracy Percentage")
+st.title("Thailand Provinces and Districts - Heatmap by ”NER“ Accuracy Percentage")
 st.markdown("[Predict Form](https://vis3test-frevdr8gq4bj582g7urhhv.streamlit.app/)!")
 
 st.markdown(
-    """This heatmap visualizes the accuracy percentage of data across Thailand’s provinces and districts. 
+    """This heatmap visualizes the Named Entity Recognition (NER) accuracy percentage of data across Thailand’s provinces and districts.
     Each region is color-coded based on the accuracy of the information associated with it, providing a clear and intuitive way to assess the quality of data at both the provincial and district levels."""
 )
 
